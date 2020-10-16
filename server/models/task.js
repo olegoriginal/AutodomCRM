@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const uuid = require('uuid')
+const statusTypes = require('../../common/enums/task-statuses')
 
-const statusTypes = ['new', 'in progress', 'done']
+
 const Task = new mongoose.Schema({
   name: {
     type: String,
