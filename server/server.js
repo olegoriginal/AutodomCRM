@@ -2,12 +2,13 @@ const express = require("express")
 const path = require("path")
 const bodyParser = require("body-parser")
 
-const mongoose = require('./services/mongoose')
-const taskRoutes = require('./routes/api/task.routes')
+const mongoose = require("./services/mongoose")
+const taskRoutes = require("./routes/api/task.routes")
+const placeRoutes = require("./routes/api/place.routes")
 
 const app = express()
 
-mongoose.connect();
+mongoose.connect()
 
 app.use(
   bodyParser.urlencoded({
@@ -19,8 +20,8 @@ app.use(
 app.use(bodyParser.json({ limit: "50mb", extended: true }))
 
 app.use(express.static(path.join(__dirname, "../build")))
-app.use('/api/v1/task', taskRoutes)
-
+app.use("/api/v1", taskRoutes)
+app.use("/api/v1", placeRoutes)
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"))
@@ -28,4 +29,3 @@ app.get("/*", function (req, res) {
 app.listen(process.env.PORT || 9000, () => {
   console.log("listening on", process.env.PORT || 9000)
 })
-

@@ -1,20 +1,33 @@
 import React from "react"
-import { Switch, Route} from 'react-router-dom'
-import App from './scenes/App'
+import { Switch, Route } from "react-router-dom"
+import App from "./scenes/App"
 import TaskDetails from "./scenes/Tasks.details"
-import TaskList from './scenes/Tasks.list'
-import Startup from './Startup'
-
+import AutopartsOrderList from "./scenes/Autoparts.order.list"
+import AutopartsOrderCreate from "./scenes/Autoparts.order.create"
+import PlaceList from "./scenes/Places.list"
+import PlaceNew from "./scenes/Places.create"
+import Startup from "./Startup"
+import Planets from "./lists/place-list"
 
 function Routes() {
   return (
     <Startup>
-      <div className="flex
-      items-start justify-center min-h-screen w-screen p-2 md:p-5">
+      <div>
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/list" component={TaskList} />
+          <Route
+            exact
+            path="/autoparts/order/list"
+            component={AutopartsOrderList}
+          />
+          <Route
+            exact
+            path="/autoparts/order/create"
+            component={AutopartsOrderCreate}
+          />
           <Route exact path="/details/:id" component={TaskDetails} />
+          <Route exact path="/place/list" component={PlaceList} />
+          <Route exact path="/place/create" component={PlaceNew} />
         </Switch>
       </div>{" "}
     </Startup>

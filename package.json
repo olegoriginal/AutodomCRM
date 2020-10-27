@@ -25,6 +25,7 @@
     "postcss-cli": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-number-format": "^4.4.1",
     "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -37,7 +38,7 @@
   },
   "scripts": {
     "build:style": "tailwind build src/index.css -o src/styles/tailwind.css",
-    "start": "node server/server",
+    "start": "nodemon server/server",
     "heroku:postbuild": "react-scripts build",
     "start:dev": "npm run build:style && react-scripts start",
     "build": "react-scripts build",

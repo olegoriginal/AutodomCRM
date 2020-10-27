@@ -1,4 +1,1 @@
-
-
-
-module.exports = ['new', 'in progress', 'done']
+module.exports = ["new", "in progress", "done"]

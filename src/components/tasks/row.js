@@ -20,6 +20,9 @@ const TaskRow = (props) => {
       <div className="mr-4 mb-4 md:mb-0 text-lg font-bold  break-words ">
         <h1>{props.name}</h1>
       </div>
+      <div className="mr-4 mb-4 md:mb-0 text-lg font-bold  break-words ">
+        <h1>{props.date}</h1>
+      </div>
       <div className="flex flex-grow flex-basis-1 md:flex-grow-0 md:flex-basis-0">
         <select className="p-1 w-full" onChange={changeStatus}>
           {taskStatuses.map((it) => {
