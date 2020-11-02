@@ -36,6 +36,16 @@ export function getTasks() {
   }
 }
 
+export function getTask() {
+  return (dispatch) => {
+    fetch("/api/v1/task:uuid")
+      .then((r) => r.json())
+      .then(({ data: task }) => {
+        dispatch({ type: GET_TASKS, task })
+      })
+  }
+}
+
 export function createTask(name) {
   return (dispatch) => {
     fetch("/api/v1/task", {

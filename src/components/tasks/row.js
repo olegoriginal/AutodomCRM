@@ -6,6 +6,7 @@ const TaskRow = (props) => {
   const changeStatus = (e) => {
     props.updateStatus(props.id, e.target.value)
   }
+  console.log(props.id)
   return (
     <div
       className={cx(

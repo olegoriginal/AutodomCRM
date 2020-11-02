@@ -35,8 +35,7 @@ const RowCreate = (props) => {
         onClick={sendData}
         disabled={state.name.length === 0}
       >
-        {" "}
-        Create{" "}
+        Create
       </button>
     </div>
   )

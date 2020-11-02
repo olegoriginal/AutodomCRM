@@ -17,7 +17,7 @@ exports.update = async (req, res) => {
     { upsert: false, useFindAndModify: false }
   )
   place = await Place.findOne({ id: req.params.id })
-  return res.json({ status: "ok", data: task })
+  return res.json({ status: "ok", data: place })
 }
 
 exports.create = async (req, res) => {
@@ -27,6 +27,6 @@ exports.create = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-  await Place.delete({ id: req.params.id })
+  await Place.deleteOne({ id: req.params.id })
   return res.json({ status: "ok", id: req.params.id })
 }

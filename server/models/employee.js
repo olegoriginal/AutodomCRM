@@ -3,10 +3,22 @@ const uuid = require("uuid")
 const AutoIncrement = require("mongoose-sequence")(mongoose)
 
 const dateNow = new Date()
-const Place = new mongoose.Schema({
+const Employee = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+  },
+  surname: {
+    type: String,
+    required: false,
+  },
+  role: {
+    type: String,
+    required: false,
+  },
+  address: {
+    type: Array,
+    required: false,
   },
   id: {
     type: String,
@@ -25,6 +37,6 @@ const Place = new mongoose.Schema({
   },
 })
 
-Place.plugin(AutoIncrement, { inc_field: "id_place" })
+Employee.plugin(AutoIncrement, { inc_field: "id_employee" })
 
-module.exports = mongoose.model("places", Place)
+module.exports = mongoose.model("employees", Employee)

@@ -14,7 +14,6 @@ const TaskList = () => {
     dispatch(updateStatus(id, status))
   }
 
-
   return (
     <div className="flex font-medium flex-col w-full">
       {" "}

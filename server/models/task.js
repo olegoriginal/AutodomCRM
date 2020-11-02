@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const uuid = require("uuid")
+const AutoIncrement = require("mongoose-sequence")(mongoose)
 const statusTypes = require("../../common/enums/task-statuses")
 
 const dateNow = new Date()
@@ -65,7 +66,7 @@ const Task = new mongoose.Schema({
     type: String,
     required: false,
   },
-  id: {
+  uuid: {
     type: String,
     unique: true,
     default: () => uuid.v4(),
@@ -78,5 +79,7 @@ const Task = new mongoose.Schema({
       }.${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes()}`,
   },
 })
+
+Task.plugin(AutoIncrement, { inc_field: "id_task" })
 
 module.exports = mongoose.model("tasks", Task)

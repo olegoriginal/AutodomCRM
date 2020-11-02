@@ -1,4 +1,9 @@
-import { GET_PLACES, CREATE_PLACE, UPDATE_PLACE } from "../actions/places"
+import {
+  GET_PLACES,
+  CREATE_PLACE,
+  UPDATE_PLACE,
+  DELETE_PLACE,
+} from "../actions/places"
 
 const initialState = {
   list: [],
@@ -20,7 +25,13 @@ export default (state = initialState, action) => {
         }),
       }
     }
-
+    case DELETE_PLACE: {
+      return {
+        list: state.list.filter((it) => {
+          return action.id !== it.id
+        }),
+      }
+    }
     default:
       return state
   }
@@ -52,7 +63,7 @@ export function createPlace(name) {
   }
 }
 
-export function updatePlace(id, status) {
+export function updatePlace(id, name) {
   return (dispatch) => {
     fetch(`/api/v1/place/${id}`, {
       method: "PATCH",
@@ -60,12 +71,24 @@ export function updatePlace(id, status) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        status,
+        name,
       }),
     })
       .then((r) => r.json())
       .then(({ data: place }) => {
         dispatch({ type: UPDATE_PLACE, place })
+      })
+  }
+}
+
+export function deletePlace(id) {
+  return (dispatch) => {
+    fetch(`/api/v1/place/${id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(({ data: place }) => {
+        dispatch({ type: DELETE_PLACE, id })
       })
   }
 }
