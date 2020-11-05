@@ -11,7 +11,8 @@ import PlaceEdit from "./scenes/Places/Places.edit"
 import EmployeeList from "./scenes/Employees/Employees.list"
 import EmployeeNew from "./scenes/Employees/Employees.create"
 import EmployeeEdit from "./scenes/Employees/Employees.edit"
-import Test from "./components/test-checkbox"
+// import Test from "./components/test-checkbox"
+import Tested from "./components/test-dropdown"
 import Startup from "./Startup"
 
 function Routes() {
@@ -38,7 +39,7 @@ function Routes() {
           <Route exact path="/employee/list" component={EmployeeList} />
           <Route exact path="/employee/create" component={EmployeeNew} />
           <Route exact path="/employee/edit/:id" component={EmployeeEdit} />
-          <Route exact path="/test" component={Test} />
+          <Route exact path="/test" component={Tested} />
         </Switch>
       </div>{" "}
     </Startup>

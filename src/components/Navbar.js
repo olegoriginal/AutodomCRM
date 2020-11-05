@@ -1,7 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
-
+import { useDispatch, useSelector } from "react-redux"
+import { signOut } from "../redux/reducers/auth"
 const Navbar = () => {
+  const dispatch = useDispatch()
   return (
     <nav className="flex items-center justify-between flex-wrap bg-white shadow px-6 py-3 z-20">
       <div className="flex items-center flex-shrink-0 text-black mr-6">
@@ -58,7 +60,12 @@ const Navbar = () => {
           </Link>
         </div>
         <div>
-          <div className="flex inline-block bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+          <button
+            className="flex inline-block bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+            onClick={() => {
+              dispatch(signOut())
+            }}
+          >
             <svg
               version="1.1"
               id="Capa_1"
@@ -83,7 +90,7 @@ const Navbar = () => {
                 <span className="mr-1">Выйти</span>
               </div>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </nav>
