@@ -53,7 +53,6 @@ export function updatePasswordField(password) {
 export function signOut() {
   return (dispatch) => {
     dispatch({ type: KICK_USER })
-    cookies.remove("token", { path: "/" })
     history.push("/login")
   }
 }

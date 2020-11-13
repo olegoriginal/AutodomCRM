@@ -4,6 +4,8 @@ import tasks from "./tasks"
 import places from "./places"
 import employees from "./employees"
 import auth from "./auth"
+import autoparts from "./autoparts"
+import customers from "./customers"
 
 export default (history) =>
   combineReducers({
@@ -12,4 +14,6 @@ export default (history) =>
     places,
     employees,
     auth,
+    autoparts,
+    customers,
   })

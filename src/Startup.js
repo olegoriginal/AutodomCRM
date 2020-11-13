@@ -1,10 +1,13 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getTasks } from "./redux/reducers/tasks"
+import { getOrders } from "./redux/reducers/orders"
+import { getAutoparts } from "./redux/reducers/autoparts"
 import { getPlaces } from "./redux/reducers/places"
 import { getEmployees } from "./redux/reducers/employees"
 import { trySignIn, tryGetUserInfo } from "./redux/reducers/auth"
 import PropTypes from "prop-types"
+import { getCustomers } from "./redux/reducers/customers"
 
 const Startup = (props) => {
   const dispatch = useDispatch()
@@ -15,6 +18,14 @@ const Startup = (props) => {
       dispatch(tryGetUserInfo())
     }
   }, [])
+
+  useEffect(() => {
+    dispatch(getAutoparts())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getCustomers())
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getTasks())

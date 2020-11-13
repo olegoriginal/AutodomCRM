@@ -9,20 +9,23 @@ import store, { history } from "../redux"
 
 import Home from "../components/login"
 import PrivateComponent from "../components/private-route"
-import NotFound from "../components/404"
+// import NotFound from "../components/404"
 // import Game from "../components/game"
 // import Chat from "../components/chat"
 import Admin from "../scenes/Admin"
 import TaskDetails from "../scenes/Tasks.details"
-import AutopartsOrderList from "../scenes/Autoparts.order.list"
-import AutopartsOrderCreate from "../scenes/Autoparts.order.create"
+import AutopartsList from "../scenes/Autoparts/Autoparts.list"
+import AutopartsNew from "../scenes/Autoparts/Autoparts.preorder.create"
+import AutopartEditSimple from "../scenes/Autoparts/Autopaparts.preorder.edit"
 import PlaceList from "../scenes/Places/Places.list"
 import PlaceNew from "../scenes/Places/Places.create"
 import PlaceEdit from "../scenes/Places/Places.edit"
 import EmployeeList from "../scenes/Employees/Employees.list"
 import EmployeeNew from "../scenes/Employees/Employees.create"
 import EmployeeEdit from "../scenes/Employees/Employees.edit"
-import Tested from "../components/test-dropdown"
+import CustomerList from "../scenes/Customers/Customers.list"
+import CustomerNew from "../scenes/Customers/Customers.create"
+import Test from "../components/test-dynamic"
 
 import Startup from "../Startup"
 
@@ -143,12 +146,17 @@ const RootComponent = (props) => {
             <PrivateRoute
               exact
               path="/autoparts/order/list"
-              component={AutopartsOrderList}
+              component={AutopartsList}
             />
             <PrivateRoute
               exact
               path="/autoparts/order/create"
-              component={AutopartsOrderCreate}
+              component={AutopartsNew}
+            />
+            <PrivateRoute
+              exact
+              path="/autoparts/edit/:id"
+              component={AutopartEditSimple}
             />
             <PrivateRoute exact path="/details/:id" component={TaskDetails} />
             <PrivateRoute exact path="/place/list" component={PlaceList} />
@@ -169,7 +177,17 @@ const RootComponent = (props) => {
               path="/employee/edit/:id"
               component={EmployeeEdit}
             />
-            <PrivateRoute exact path="/test" component={Tested} />
+            <PrivateRoute
+              exact
+              path="/customer/list"
+              component={CustomerList}
+            />
+            <PrivateRoute
+              exact
+              path="/customer/create"
+              component={CustomerNew}
+            />
+            <PrivateRoute exact path="/test" component={Test} />
           </Switch>
         </Startup>
       </RouterSelector>

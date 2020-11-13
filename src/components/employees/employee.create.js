@@ -38,7 +38,10 @@ const EmployeeCreate = (props) => {
   }
 
   const sendData = () => {
-    if (!state) notify("Поле пустое")
+    if (!state.name) notify("Поле Имя пустое")
+    else if (!state.surname) notify("Поле Фамилия пустое")
+    else if (!state.role) notify("Поле Должность пустое")
+    else if (state.address.length === 0) notify("Выберете место работы")
     else {
       props.create(state)
       history.push("/employee/list")

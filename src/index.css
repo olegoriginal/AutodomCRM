@@ -20,4 +20,14 @@ code {
 
 .dropdown {
   max-height: 400px;
+  overflow-y: scroll;
+}
+.auto-search {
+  max-height: 85%;
+}
+
+.text__autoparts {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -7,7 +7,7 @@ import cx from "classnames"
 import "react-toastify/dist/ReactToastify.css"
 import autopartsList from "../../lists/autoparts-list"
 
-const AutopartsCreate = (props) => {
+const AutopartsEdit = (props) => {
   const list = useSelector((s) => s.places.list)
   const employeeList = useSelector((s) => s.employees.list)
   const customerList = useSelector((s) => s.customers.list)
@@ -516,11 +516,7 @@ const AutopartsCreate = (props) => {
                     Введите полностью гос. номер, VIN либо номер телефона чтобы
                     найти клиента. Если клиент отстствует, заполните данные
                     самостоятельно. Тогда в базе данных клиентов появится новый
-                    клиент. Если данные какого-то клиента больше не актуальны,
-                    вы можете удалить его либо изменить данные на странице{" "}
-                    <Link to="/customer/list" className="underline">
-                      Клиенты
-                    </Link>
+                    клиент
                   </td>
                   <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static"></td>
                 </tr>
@@ -880,4 +876,4 @@ const AutopartsCreate = (props) => {
   )
 }
 
-export default AutopartsCreate
+export default AutopartsEdit

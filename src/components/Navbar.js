@@ -1,9 +1,16 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import cx from "classnames"
+import { useDispatch } from "react-redux"
 import { signOut } from "../redux/reducers/auth"
+
 const Navbar = () => {
   const dispatch = useDispatch()
+  const [toggle, setToggle] = useState(false)
+  const toggleOpen = () => {
+    toggle === false ? setToggle(true) : setToggle(false)
+  }
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-white shadow px-6 py-3 z-20">
       <div className="flex items-center flex-shrink-0 text-black mr-6">
@@ -21,7 +28,10 @@ const Navbar = () => {
         </span>
       </div>
       <div className="block lg:hidden">
-        <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+        <button
+          className="flex items-center px-3 py-2 border rounded text-gray-600 border-gray-600 hover:text-gray-800 hover:border-gray-800"
+          onClick={toggleOpen}
+        >
           <svg
             className="fill-current h-3 w-3"
             viewBox="0 0 20 20"
@@ -32,7 +42,15 @@ const Navbar = () => {
           </svg>
         </button>
       </div>
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      <div
+        className={cx(
+          "w-full block flex-grow lg:flex lg:items-center lg:w-auto",
+          {
+            hidden: toggle === false,
+            block: toggle === true,
+          }
+        )}
+      >
         <div className="text-sm lg:flex-grow">
           <Link
             to="/autoparts/order/list"
@@ -58,10 +76,16 @@ const Navbar = () => {
           >
             Сотрудники
           </Link>
+          <Link
+            to="/customer/list"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
+          >
+            Клиенты
+          </Link>
         </div>
         <div>
           <button
-            className="flex inline-block bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+            className="flex inline-block bg-gray-100 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center md:mt-0 mt-4 "
             onClick={() => {
               dispatch(signOut())
             }}
@@ -85,9 +109,9 @@ const Navbar = () => {
                 />
               </g>
             </svg>
-            <div className="dropdown inline-block relative">
+            <div className="inline-block relative">
               <div className="inline-flex items-center">
-                <span className="mr-1">Выйти</span>
+                <span className="mr-1 font-normal text-sm">Выйти</span>
               </div>
             </div>
           </button>
