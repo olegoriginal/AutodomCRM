@@ -17,12 +17,16 @@ import TaskDetails from "../scenes/Tasks.details"
 import AutopartsList from "../scenes/Autoparts/Autoparts.list"
 import AutopartsNew from "../scenes/Autoparts/Autoparts.preorder.create"
 import AutopartEditSimple from "../scenes/Autoparts/Autopaparts.preorder.edit"
+import AutopartEditFull from "../scenes/Autoparts/Autoparts.edit"
 import PlaceList from "../scenes/Places/Places.list"
 import PlaceNew from "../scenes/Places/Places.create"
 import PlaceEdit from "../scenes/Places/Places.edit"
 import EmployeeList from "../scenes/Employees/Employees.list"
 import EmployeeNew from "../scenes/Employees/Employees.create"
 import EmployeeEdit from "../scenes/Employees/Employees.edit"
+import AccountList from "../scenes/Accounts/Accounts.list"
+import AccountNew from "../scenes/Accounts/Accounts.create"
+import AccountEdit from "../scenes/Accounts/Accounts.edit"
 import CustomerList from "../scenes/Customers/Customers.list"
 import CustomerNew from "../scenes/Customers/Customers.create"
 import Test from "../components/test-dynamic"
@@ -158,6 +162,11 @@ const RootComponent = (props) => {
               path="/autoparts/edit/:id"
               component={AutopartEditSimple}
             />
+            <PrivateRoute
+              exact
+              path="/autoparts/editfull/:id"
+              component={AutopartEditFull}
+            />
             <PrivateRoute exact path="/details/:id" component={TaskDetails} />
             <PrivateRoute exact path="/place/list" component={PlaceList} />
             <PrivateRoute exact path="/place/create" component={PlaceNew} />
@@ -176,6 +185,13 @@ const RootComponent = (props) => {
               exact
               path="/employee/edit/:id"
               component={EmployeeEdit}
+            />
+            <PrivateRoute exact path="/account/list" component={AccountList} />
+            <PrivateRoute exact path="/account/create" component={AccountNew} />
+            <PrivateRoute
+              exact
+              path="/account/edit/:id"
+              component={AccountEdit}
             />
             <PrivateRoute
               exact

@@ -4,7 +4,7 @@ const AutoIncrement = require("mongoose-sequence")(mongoose)
 const statusTypes = require("../../common/enums/task-statuses")
 
 const dateNow = new Date()
-const Autoparts = new mongoose.Schema({
+const Autopart = new mongoose.Schema({
   employee: {
     type: String,
     required: false,
@@ -111,6 +111,6 @@ const Autoparts = new mongoose.Schema({
   },
 })
 
-Autoparts.plugin(AutoIncrement, { inc_field: "id_autoparts" })
+Autopart.plugin(AutoIncrement, { inc_field: "id_autoparts" })
 
-module.exports = mongoose.model("autoparts", Autoparts)
+module.exports = mongoose.model("autoparts", Autopart)

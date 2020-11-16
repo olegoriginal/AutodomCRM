@@ -42,7 +42,6 @@ const AutopartUpdate = (props) => {
     status: props.status,
     process: props.process,
     prepay: props.prepay,
-    id: props.id_autoparts,
     commentOrder: props.commentOrder,
     order: props.order.length !== 0 ? props.order : [{ autopartItem: "" }],
     dateInWork: props.dateInWork,
@@ -104,7 +103,7 @@ const AutopartUpdate = (props) => {
       come: it.come,
     }))
   )
-  console.log(state.order)
+
   const handleChangeInput = (index, event) => {
     const values = [...inputFields]
     values[index][event.target.name] = event.target.value
@@ -164,7 +163,7 @@ const AutopartUpdate = (props) => {
             <div className="text-center md:text-left m-3">
               <h2>Заказ {props.id_autoparts}</h2>
               <div>
-                <ul>
+                <ul className="mb-4">
                   <li>
                     <b>Принял заказ:</b> {props.employee}
                   </li>
@@ -182,9 +181,12 @@ const AutopartUpdate = (props) => {
                     <b>Предоплата:</b> {props.prepay ? props.prepay : "Нет"}
                   </li>
                 </ul>
-                <button className="py-2 px-3 mt-2 bg-blue-600 text-white text-sm hover:bg-blue-700 hover:text-white rounded-full h-22 w-22">
+                <Link
+                  to={`/autoparts/editfull/${props.id_autoparts}`}
+                  className="py-2 px-3 bg-blue-600 text-white text-sm hover:bg-blue-700 hover:text-white rounded-full h-22 w-22"
+                >
                   Редактировать заказ
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -194,10 +196,10 @@ const AutopartUpdate = (props) => {
               src={malePlaceholder}
               alt="Олег"
             />
-            <div className="text-center md:text-left m-3 max-w-xs">
+            <div className="text-center md:text-left m-3">
               <h2>Клиент</h2>
               <div>
-                <ul>
+                <ul className="mb-4">
                   <li className="whitespace-normal">
                     <b>Авто:</b> {props.mark} {props.model} {props.gen}{" "}
                     {props.mod}
@@ -215,9 +217,12 @@ const AutopartUpdate = (props) => {
                     <b>Телефон:</b> {props.phone}
                   </li>
                 </ul>
-                <button className="py-2 px-3 mt-2 bg-blue-600 text-white text-sm hover:bg-blue-700 hover:text-white rounded-full h-22 w-22">
-                  Просмотреть заказы клиента
-                </button>
+                <Link
+                  to={`/autoparts/editfull/${props.id_autoparts}`}
+                  className="py-2 px-3 bg-blue-600 text-white text-sm hover:bg-blue-700 hover:text-white rounded-full h-22 w-22"
+                >
+                  Заказы клиента
+                </Link>
               </div>
             </div>
           </div>
@@ -244,12 +249,7 @@ const AutopartUpdate = (props) => {
               </div>
             </div>
             <div className="px-3">
-              <label
-                className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-zip"
-              >
-                Обработал заказ
-              </label>
+              <b>Обработал заказ</b>
               <div className="flex-shrink w-full inline-block relative mb-3">
                 <select
                   className="block appearance-none w-full bg-grey-lighter border border-gray-300 focus:border-gray-500 focus:outline-none py-1 px-4 pr-8 rounded"
@@ -288,12 +288,7 @@ const AutopartUpdate = (props) => {
               </div>
             </div>
             <div className="px-3">
-              <label
-                className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-zip"
-              >
-                Изменить статус заказа
-              </label>
+              <b>Изменить статус заказа</b>
               <div className="flex-shrink w-full inline-block relative mb-3">
                 <select
                   className="block appearance-none w-full bg-grey-lighter border border-gray-300 focus:border-gray-500 focus:outline-none py-1 px-4 pr-8 rounded"
@@ -388,12 +383,7 @@ const AutopartUpdate = (props) => {
 
           <div className="md:m-3 lg:flex flex-col rounded-lg px-6 py-2 w-auto shadow rounded-lg bg-gray-100 my-2">
             <div className="text-center md:text-left m-3">
-              <label
-                className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-city"
-              >
-                Предварительный заказ
-              </label>
+              <b>Предварительный заказ</b>
               <div className="-mx-3 md:flex mb-2">
                 <div className="overflow-x-auto md:w-auto px-3 mb-6 md:mb-0">
                   {props.preorder.map((it) => (
@@ -403,12 +393,7 @@ const AutopartUpdate = (props) => {
               </div>
               {props.comment ? (
                 <div>
-                  <label
-                    className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                    for="grid-city"
-                  >
-                    Комментарий
-                  </label>
+                  <b>Комментарий</b>
                   <div className="-mx-3 md:flex mb-2">
                     <div className="overflow-x-auto md:w-auto px-3 mb-6 md:mb-0">
                       <p>{props.comment}</p>
@@ -427,196 +412,158 @@ const AutopartUpdate = (props) => {
             >
               Заказ у поставщика
             </label>
-            <table className="border-collapse w-full">
-              <thead>
-                <tr>
-                  <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
-                    Запчасти
-                  </th>
-                  <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell whitespace-no-wrap">
-                    Кол-во
-                  </th>
-                  <th className="p-3 px-8 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
-                    Цена
-                  </th>
-                  <th className="p-3 px-6 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
-                    Сумма
-                  </th>
-                  <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
-                    Статус
-                  </th>
-                  <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell whitespace-no-wrap">
-                    Дата прибытия
-                  </th>
-                  <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
-                    Строки
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {inputFields.map((inputField, index) => (
-                  <tr
-                    key={index}
-                    className="bg-white lg:hover:bg-gray-100 flex table-row flex-row lg:flex-row flex-wrap flex-no-wrap mb-10 lg:mb-0"
-                  >
-                    <td className="lg:w-7/12 p-2 text-gray-800 text-center border border-b block table-cell relative static">
-                      <input
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        type="text"
-                        placeholder="Например: Сайлентблок нижнего рычага задние LEMFORDER"
-                        name="autopartItem"
-                        value={inputField.autopartItem}
-                        defaultValue={
-                          state.order.find((it, id) => id === index)
-                            ? state.order.find((it, id) => id === index)
-                                .autopartItem
-                            : ""
-                        }
-                        onChange={(event) => handleChangeInput(index, event)}
-                      />
-                    </td>
-                    <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
-                      <input
-                        className="w-32 appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        type="text"
-                        name="quantity"
-                        type="number"
-                        value={inputField.quantity}
-                        defaultValue={
-                          state.order.find((it, id) => id === index)
-                            ? state.order.find((it, id) => id === index)
-                                .quantity
-                            : ""
-                        }
-                        autocomplete="off"
-                        onChange={(event) => handleChangeInput(index, event)}
-                      />
-                    </td>
-                    <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
-                      <input
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        type="text"
-                        name="price"
-                        type="number"
-                        value={inputField.price}
-                        defaultValue={
-                          state.order.find((it, id) => id === index)
-                            ? state.order.find((it, id) => id === index).price
-                            : ""
-                        }
-                        autocomplete="off"
-                        onChange={(event) => handleChangeInput(index, event)}
-                      />
-                    </td>
-                    <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
-                      <p>
-                        {inputField.price && inputField.quantity
-                          ? inputField.price * inputField.quantity
-                          : null}
-                      </p>
-                    </td>
-                    <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
-                      <select
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        name="stat"
-                        value={inputField.stat}
-                        defaultValue={
-                          state.order.find((it, id) => id === index)
-                            ? state.order.find((it, id) => id === index).stat
-                            : ""
-                        }
-                        autocomplete="off"
-                        onChange={(event) => handleChangeInput(index, event)}
-                      >
-                        <option
-                          value=""
-                          disabled
-                          selected
-                          hidden
-                          className="text-gray-800"
-                        >
-                          Выберите статус
-                        </option>
-                        {autopartStatuses.map((it) => (
-                          <option>{it}</option>
-                        ))}
-                      </select>
-                    </td>
-                    <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
-                      <input
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        type="text"
-                        name="come"
-                        value={inputField.come}
-                        defaultValue={
-                          state.order.find((it, id) => id === index)
-                            ? state.order.find((it, id) => id === index).come
-                            : ""
-                        }
-                        autocomplete="off"
-                        onChange={(event) => handleChangeInput(index, event)}
-                      />
-                    </td>
-                    <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center table-cell">
-                      <div className="flex flex-row">
-                        <button
-                          onClick={() => handleRemoveFields(index)}
-                          className="py-1 px-3 bg-red-500 text-white font-bold hover:bg-red-700 hover:text-white rounded-lg mr-1"
-                        >
-                          -
-                        </button>
-                        <button
-                          onClick={() => handleAddFields()}
-                          className="py-1 px-3 bg-blue-500 text-white font-bold hover:bg-blue-700 hover:text-white rounded-lg"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
+            <div class="overflow-x-auto md:w-full  mb-6 md:mb-0">
+              <table className="border-collapse w-full">
+                <thead>
+                  <tr>
+                    <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
+                      Запчасти
+                    </th>
+                    <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell whitespace-no-wrap">
+                      Кол-во
+                    </th>
+                    <th className="p-3 px-8 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
+                      Цена
+                    </th>
+                    <th className="p-3 px-6 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 hidden md:table-cell">
+                      Сумма
+                    </th>
+                    <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
+                      Статус
+                    </th>
+                    <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell whitespace-no-wrap">
+                      Дата прибытия
+                    </th>
+                    <th className="p-3 font-bold uppercase bg-gray-100 text-sm text-gray-600 border border-gray-300 table-cell">
+                      Строки
+                    </th>
                   </tr>
-                ))}
-                {/* {inputFields.map((inputField, index) => (
-                  <tr
-                    key={index}
-                    className="bg-white lg:hover:bg-gray-100 flex table-row flex-row lg:flex-row flex-wrap flex-no-wrap mb-10 lg:mb-0"
-                  >
-                    <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b block table-cell relative static">
-                      <input
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        type="text"
-                        placeholder="Например: Сайлентблок нижнего рычага задние LEMFORDER"
-                        name="autopartItem"
-                        value={inputField.autopartItem}
-                        onChange={(event) => handleChangeInput(index, event)}
-                      />
-                      <input
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                        type="text"
-                        placeholder="123"
-                        name="quantity"
-                        value={inputField.quantity}
-                        autocomplete="off"
-                        onChange={(event) => handleChangeInput(index, event)}
-                      />
-                    </td>
-                    <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center flex flex-row table-cell relative static">
-                      <button
-                        onClick={() => handleRemoveFields(index)}
-                        className="py-1 px-3 bg-red-500 text-white font-bold hover:bg-red-700 hover:text-white rounded-lg mr-1"
-                      >
-                        -
-                      </button>
-                      <button
-                        onClick={() => handleAddFields()}
-                        className="py-1 px-3 bg-blue-500 text-white font-bold hover:bg-blue-700 hover:text-white rounded-lg"
-                      >
-                        +
-                      </button>
-                    </td>
-                  </tr>
-                ))} */}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {inputFields.map((inputField, index) => (
+                    <tr
+                      key={index}
+                      className="bg-white lg:hover:bg-gray-100 flex table-row flex-row lg:flex-row flex-wrap flex-no-wrap mb-10 lg:mb-0"
+                    >
+                      <td className="lg:w-7/12 p-2 text-gray-800 text-center border border-b block table-cell relative static">
+                        <input
+                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
+                          type="text"
+                          placeholder="Например: Сайлентблок нижнего рычага задние LEMFORDER"
+                          name="autopartItem"
+                          value={inputField.autopartItem}
+                          defaultValue={
+                            state.order.find((it, id) => id === index)
+                              ? state.order.find((it, id) => id === index)
+                                  .autopartItem
+                              : ""
+                          }
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                      </td>
+                      <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                        <input
+                          className="w-32 appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
+                          type="text"
+                          name="quantity"
+                          type="number"
+                          value={inputField.quantity}
+                          defaultValue={
+                            state.order.find((it, id) => id === index)
+                              ? state.order.find((it, id) => id === index)
+                                  .quantity
+                              : ""
+                          }
+                          autocomplete="off"
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                      </td>
+                      <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                        <input
+                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
+                          type="text"
+                          name="price"
+                          type="number"
+                          value={inputField.price}
+                          defaultValue={
+                            state.order.find((it, id) => id === index)
+                              ? state.order.find((it, id) => id === index).price
+                              : ""
+                          }
+                          autocomplete="off"
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                      </td>
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block hidden md:table-cell relative static">
+                        <p>
+                          {inputField.price && inputField.quantity
+                            ? inputField.price * inputField.quantity
+                            : null}
+                        </p>
+                      </td>
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                        <select
+                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
+                          name="stat"
+                          value={inputField.stat}
+                          defaultValue={
+                            state.order.find((it, id) => id === index)
+                              ? state.order.find((it, id) => id === index).stat
+                              : ""
+                          }
+                          autocomplete="off"
+                          onChange={(event) => handleChangeInput(index, event)}
+                        >
+                          <option
+                            value=""
+                            disabled
+                            selected
+                            hidden
+                            className="text-gray-800"
+                          >
+                            Выберите статус
+                          </option>
+                          {autopartStatuses.map((it) => (
+                            <option>{it}</option>
+                          ))}
+                        </select>
+                      </td>
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                        <input
+                          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
+                          type="text"
+                          name="come"
+                          value={inputField.come}
+                          defaultValue={
+                            state.order.find((it, id) => id === index)
+                              ? state.order.find((it, id) => id === index).come
+                              : ""
+                          }
+                          autocomplete="off"
+                          onChange={(event) => handleChangeInput(index, event)}
+                        />
+                      </td>
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center table-cell">
+                        <div className="flex flex-row">
+                          <button
+                            onClick={() => handleRemoveFields(index)}
+                            className="py-1 px-3 bg-red-500 text-white font-bold hover:bg-red-700 hover:text-white rounded-lg mr-1"
+                          >
+                            -
+                          </button>
+                          <button
+                            onClick={() => handleAddFields()}
+                            className="py-1 px-3 bg-blue-500 text-white font-bold hover:bg-blue-700 hover:text-white rounded-lg"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -664,16 +611,10 @@ const AutopartUpdate = (props) => {
       <div className=" flex my-2">
         <Link
           to="/autoparts/order/list"
-          className="my-3 mr-2 py-2 w-1/3 px-3 bg-green-600 text-white text-center hover:bg-green-700 hover:text-white rounded-lg"
+          className="my-3 mr-2 py-2 w-1/3 px-3 bg-red-600 text-white text-center hover:bg-red-700 hover:text-white rounded-lg"
         >
           Отмена
         </Link>
-        <button
-          className="my-3 mr-2 py-2 w-1/3 px-3 bg-red-600 text-white text-center hover:bg-red-700 hover:text-white rounded-lg"
-          onClick={() => SetIsOpen(true)}
-        >
-          Удалить
-        </button>
         <button
           className="my-3 ml-2 py-2 w-2/3 px-3 bg-blue-600 text-white hover:bg-blue-700 hover:text-white rounded-lg"
           onClick={changeAutopart}
@@ -681,11 +622,6 @@ const AutopartUpdate = (props) => {
           Сохранить
         </button>
       </div>
-      <Modal
-        open={isOpen}
-        onClose={() => SetIsOpen(false)}
-        onSubmit={removeAutopart}
-      />
     </div>
   )
 }

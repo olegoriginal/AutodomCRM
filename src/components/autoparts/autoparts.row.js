@@ -26,11 +26,11 @@ const AutopartsRow = (props) => {
         <span className="lg:hidden px-2 py-1 text-xs font-bold uppercase">
           Заказ:
         </span>
-        {props.order.length !== 0
-          ? props.order.map((it) => (
-              <p className="overflow-hidden">{it.autopartItem}</p>
-            ))
-          : props.preorder.map((it) => <p>{it.autopartItem}</p>)}
+        {props.order.length !== 0 && props.order[0].autopartItem !== ""
+          ? props.order
+              .slice(0, 2)
+              .map((it) => <p className="overflow-hidden">{it.autopartItem}</p>)
+          : props.preorder.slice(0, 2).map((it) => <p>{it.autopartItem}</p>)}
       </td>
 
       <td className="w-full lg:w-auto p-2 text-gray-800 text-left text-sm lg:text-center border border-b block lg:table-cell relative lg:static">
@@ -88,7 +88,7 @@ const AutopartsRow = (props) => {
       </td>
       <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static whitespace-no-wrap">
         <Link
-          to={`/autoparts/edit/${props.id}`}
+          to={`/autoparts/edit/${props.id_autoparts}`}
           className="px-5 py-1 text-xs border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none"
         >
           Подробнее

@@ -82,6 +82,12 @@ const Navbar = () => {
           >
             Клиенты
           </Link>
+          <Link
+            to="/account/list"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
+          >
+            Аккаунты
+          </Link>
         </div>
         <div>
           <button

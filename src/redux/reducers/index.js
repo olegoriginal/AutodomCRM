@@ -6,6 +6,7 @@ import employees from "./employees"
 import auth from "./auth"
 import autoparts from "./autoparts"
 import customers from "./customers"
+import accounts from "./accounts"
 
 export default (history) =>
   combineReducers({
@@ -16,4 +17,5 @@ export default (history) =>
     auth,
     autoparts,
     customers,
+    accounts,
   })

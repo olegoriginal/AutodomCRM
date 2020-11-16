@@ -25,22 +25,29 @@ const AutopartsEdit = (props) => {
     gen: "",
     mod: "",
   })
-  const [inputFields, setInputFields] = useState([{ autopartItem: "" }])
+
   const [state, setState] = useState({
-    employee: "",
-    place: "",
-    regnumber: "",
-    vinnumber: "",
-    mark: "",
-    model: "",
-    gen: "",
-    mod: "",
-    preorder: [],
-    name: "",
-    phone: "",
-    prepay: "",
-    comment: "",
+    employee: props.employee,
+    place: props.place,
+    regnumber: props.regnumber,
+    vinnumber: props.vinnumber,
+    mark: props.mark,
+    model: props.model,
+    gen: props.gen,
+    mod: props.mod,
+    preorder:
+      props.preorder.length !== 0 ? props.preorder : [{ autopartItem: "" }],
+    name: props.name,
+    phone: props.phone,
+    prepay: props.prepay,
+    comment: props.comment,
   })
+
+  const [inputFields, setInputFields] = useState(
+    state.preorder.map((it) => ({
+      autopartItem: it.autopartItem,
+    }))
+  )
 
   const [customer, setCustomer] = useState({
     regnumber: "",
@@ -305,25 +312,9 @@ const AutopartsEdit = (props) => {
       state.name &&
       state.phone
     ) {
-      if (
-        state.regnumber === checkCustomer.regnumber &&
-        state.vinnumber === checkCustomer.vinnumber &&
-        state.mark === checkCustomer.mark &&
-        state.model === checkCustomer.model &&
-        state.gen === checkCustomer.gen &&
-        state.mod === checkCustomer.mod &&
-        state.name === checkCustomer.name &&
-        state.phone === checkCustomer.phone
-      ) {
-        props.create(state)
-        history.push("/autoparts/order/list")
-        notify("Запись добавлена")
-      } else {
-        props.create(state)
-        props.createCust(customer)
-        history.push("/autoparts/order/list")
-        notify("Запись добавлена, создан новый клиент")
-      }
+      props.updateAutopart(props.id, state)
+      history.push(`/autoparts/edit/${props.id_autoparts}`)
+      notify("Данные о заказе обновлены")
     }
   }
 
@@ -338,7 +329,12 @@ const AutopartsEdit = (props) => {
   }
 
   const handleAddFields = () => {
-    setInputFields([...inputFields, { autopartItem: "" }])
+    setInputFields([
+      ...inputFields,
+      {
+        autopartItem: "",
+      },
+    ])
     setState((prevState) => ({
       ...prevState,
       preorder: inputFields,
@@ -383,6 +379,7 @@ const AutopartsEdit = (props) => {
                     value={state.employee}
                     name="employee"
                     id="employee"
+                    disabled="disabled"
                     onChange={onChange}
                   >
                     <option
@@ -404,15 +401,6 @@ const AutopartsEdit = (props) => {
                         )
                       })}
                   </select>
-                  <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
-                    <svg
-                      className="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
                 </div>
               </div>
               <div className="mb-5 w-1/2 pl-3">
@@ -428,6 +416,7 @@ const AutopartsEdit = (props) => {
                     value={state.place}
                     name="place"
                     id="place"
+                    disabled="disabled"
                     onChange={onChange}
                   >
                     <option
@@ -443,15 +432,6 @@ const AutopartsEdit = (props) => {
                       return <option>{it.name}</option>
                     })}
                   </select>
-                  <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
-                    <svg
-                      className="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
                 </div>
               </div>
             </div>
@@ -515,8 +495,8 @@ const AutopartsEdit = (props) => {
                   <td className="w-full lg:w-auto p-2 text-xs text-gray-800 text-center border border-b block table-cell relative static">
                     Введите полностью гос. номер, VIN либо номер телефона чтобы
                     найти клиента. Если клиент отстствует, заполните данные
-                    самостоятельно. Тогда в базе данных клиентов появится новый
-                    клиент
+                    самостоятельно. Новый клиент не будет создан. Новый клиент
+                    создается только при создании нового заказа
                   </td>
                   <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static"></td>
                 </tr>
@@ -788,7 +768,12 @@ const AutopartsEdit = (props) => {
                         name="autopartItem"
                         list="autoparts_list"
                         value={inputField.autopartItem}
-                        autoComplete="off"
+                        defaultValue={
+                          state.preorder.find((it, id) => id === index)
+                            ? state.preorder.find((it, id) => id === index)
+                                .autopartItem
+                            : ""
+                        }
                         onChange={(event) => handleChangeInput(index, event)}
                       />
                       <datalist id="autoparts_list">
@@ -858,7 +843,7 @@ const AutopartsEdit = (props) => {
       </div>
       <div className=" flex my-2">
         <Link
-          to="/autoparts/order/list"
+          to={`/autoparts/edit/${props.id_autoparts}`}
           className="my-3 mr-2 py-2 md:w-1/3 px-3 bg-red-600 text-white text-center hover:bg-red-700 hover:text-white rounded-lg"
         >
           Отмена
@@ -869,7 +854,7 @@ const AutopartsEdit = (props) => {
           onClick={sendData}
           type="submit"
         >
-          Создать
+          Сохранить
         </button>
       </div>
     </div>

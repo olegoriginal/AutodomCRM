@@ -17,6 +17,16 @@ export default (state = initialState, action) => {
     case CREATE_AUTOPART: {
       return { ...state, list: [...state.list, action.autopart] }
     }
+    case UPDATE_AUTOPART: {
+      return {
+        ...state,
+        list: state.list.map((it) => {
+          return action.autopart.id_autoparts === it.id_autoparts
+            ? action.autopart
+            : it
+        }),
+      }
+    }
     case UPDATE_AUTOPART_STATUS: {
       return {
         ...state,
