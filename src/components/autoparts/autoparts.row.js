@@ -7,7 +7,7 @@ const AutopartsRow = (props) => {
   const changeStatus = (e) => {
     props.updateStatus(props.id, e.target.value)
   }
-  console.log(props.order)
+
   return (
     <tr className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-5 lg:mb-0">
       <td className="w-full lg:w-auto p-2 text-gray-800 text-left text-sm lg:text-center border border-b block lg:table-cell relative lg:static">

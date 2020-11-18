@@ -284,7 +284,18 @@ const AutopartsCreate = (props) => {
   }
   const sendData = () => {
     const checkCustomer =
-      customerList !== [] ? customerList.find((it) => it.id === search) : {}
+      customerList !== []
+        ? customerList.find((it) => it.id === search)
+        : {
+            regnumber: "",
+            vinnumber: "",
+            mark: "",
+            model: "",
+            gen: "",
+            name: "",
+            phone: "",
+          }
+    console.log(checkCustomer)
     if (!state.employee) notify("Заполните поле Принял заказ")
     if (!state.place) notify("Заполните поле Заказ принят на точке")
     if (!state.regnumber) notify("Заполните поле гос.номер")
@@ -306,6 +317,7 @@ const AutopartsCreate = (props) => {
       state.phone
     ) {
       if (
+        checkCustomer !== undefined &&
         state.regnumber === checkCustomer.regnumber &&
         state.vinnumber === checkCustomer.vinnumber &&
         state.mark === checkCustomer.mark &&

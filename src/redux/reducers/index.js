@@ -11,10 +11,10 @@ import accounts from "./accounts"
 export default (history) =>
   combineReducers({
     router: connectRouter(history),
+    auth,
     tasks,
     places,
     employees,
-    auth,
     autoparts,
     customers,
     accounts,

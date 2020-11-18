@@ -93,6 +93,6 @@ app.get("/api/v1/auth", async (req, res) => {
   }
 })
 
-app.get("/api/v1/user-info", auth(["admin"]), (req, res) => {
-  res.json({ users: connections.map((t) => t.userInfo) })
+app.get("/api/v1/user-info", auth([]), (req, res) => {
+  res.json({ status: "123" })
 })

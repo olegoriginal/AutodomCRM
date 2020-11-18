@@ -41,6 +41,7 @@
     "react-toastify": "^6.0.9",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "socket.io": "^3.0.2",
     "sockjs-client": "^1.5.0",
     "tailwindcss": "^1.9.2",
     "universal-cookie": "^4.0.4",
