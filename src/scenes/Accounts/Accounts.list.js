@@ -26,7 +26,7 @@ const AccountList = () => {
   const deleteAccountLocal = (id) => {
     dispatch(deleteAccount(id))
     setIsOpen(false)
-    notify("Адрес удален")
+    notify("Аккаунт удален")
   }
   return (
     <div>
@@ -64,8 +64,8 @@ const AccountList = () => {
           </table>
         </div>
         <Link to="/account/create">
-          <button className="py-2 w-full bg-blue-600 text-white hover:bg-blue-700 hover:text-white rounded-lg lg:my-3 my-0">
-            Добавить новый аккаунт
+          <button className="fixed bottom-0 h-32 w-32 left-0 p-6 shadow bg-blue-600 text-white text-l hover:bg-blue-700 hover:text-white rounded-full my-3 mx-3">
+            Новый<br></br>аккаунт
           </button>
         </Link>
       </div>

@@ -8,14 +8,14 @@ import roleList from "../../lists/account-role-list"
 const AccountUpdate = (props) => {
   const [isOpen, SetIsOpen] = useState(false)
   const removeAccount = (e) => {
-    props.deleteAccount(props.id, e.target.value)
+    props.deleteAccount(props._id, e.target.value)
     history.push("/account/list")
     notify("Аккаунт удален")
   }
   const changeAccount = () => {
     if (!state) notify("Поле пустое")
     else {
-      props.updateAccount(props.id, state)
+      props.updateAccount(props._id, state)
       history.push("/account/list")
       notify("Данные изменены")
     }

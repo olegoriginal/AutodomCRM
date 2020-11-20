@@ -5,7 +5,7 @@ import { getAutoparts } from "./redux/reducers/autoparts"
 import { getPlaces } from "./redux/reducers/places"
 import { getEmployees } from "./redux/reducers/employees"
 import { getAccounts } from "./redux/reducers/accounts"
-import { trySignIn, tryGetUserInfo } from "./redux/reducers/auth"
+import { trySignIn } from "./redux/reducers/auth"
 import PropTypes from "prop-types"
 import { getCustomers } from "./redux/reducers/customers"
 
@@ -15,7 +15,6 @@ const Startup = (props) => {
   useEffect(() => {
     if (token) {
       dispatch(trySignIn())
-      dispatch(tryGetUserInfo())
     }
   }, [token, dispatch])
 

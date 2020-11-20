@@ -21,14 +21,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         list: state.list.map((it) => {
-          return action.account.id === it.id ? action.account : it
+          return action.account._id === it._id ? action.account : it
         }),
       }
     }
     case DELETE_ACCOUNT: {
       return {
         list: state.list.filter((it) => {
-          return action.id !== it.id
+          return action.id !== it._id
         }),
       }
     }

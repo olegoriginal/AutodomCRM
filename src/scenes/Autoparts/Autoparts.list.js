@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css"
 import AutopartsRow from "../../components/autoparts/autoparts.row"
 import { updateStatus } from "../../redux/reducers/autoparts"
 import Navbar from "../../components/Navbar"
-import Pagination from "./Pagination"
+import Pagination from "../Pagination"
 import taskStatuses from "../../task-statuses"
 
 const AutopartsList = () => {
@@ -16,6 +16,7 @@ const AutopartsList = () => {
   const list = useSelector((s) => s.autoparts.list)
   const revList = [].concat(list).reverse()
   const placesList = useSelector((s) => s.places.list)
+  const role = useSelector((s) => s.auth.roles)
 
   const updateStatusLocal = (id, status) => {
     dispatch(updateStatus(id, status))
@@ -423,6 +424,7 @@ const AutopartsList = () => {
                       key={index}
                       {...it}
                       updateStatus={updateStatusLocal}
+                      role={role}
                     />
                   ))
                 : currentPostsFiltered.map((it, index) => (
@@ -430,6 +432,7 @@ const AutopartsList = () => {
                       key={index}
                       {...it}
                       updateStatus={updateStatusLocal}
+                      role={role}
                     />
                   ))}
             </tbody>

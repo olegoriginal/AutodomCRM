@@ -12,12 +12,12 @@ exports.getOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   let account = await userSchema.findOneAndUpdate(
-    { id: req.params.id },
+    { _id: req.params.id },
     { $set: req.body },
     { upsert: false, useFindAndModify: false }
   )
   await account.save()
-  account = await userSchema.findOne({ id: req.params.id })
+  account = await userSchema.findOne({ _id: req.params.id })
 
   return res.json({ status: "ok", data: account })
 }
@@ -29,6 +29,6 @@ exports.create = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-  await userSchema.deleteOne({ id: req.params.id })
-  return res.json({ status: "ok", id: req.params.id })
+  await userSchema.deleteOne({ _id: req.params.id })
+  return res.json({ status: "ok", _id: req.params.id })
 }

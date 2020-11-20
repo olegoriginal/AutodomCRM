@@ -33,7 +33,7 @@ const middleware = [
   bodyParser.json({ limit: "50mb", extended: true }),
   cookieParser(),
 ]
-
+middleware.forEach((it) => app.use(it))
 passport.use("jwt", passportJWT.jwt)
 
 app.use(

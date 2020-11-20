@@ -8,7 +8,7 @@ import { updateAccount, deleteAccount } from "../../redux/reducers/accounts"
 const AccountEdit = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const list = useSelector((s) => s.accounts.list).filter((it) => it.id === id)
+  const list = useSelector((s) => s.accounts.list).filter((it) => it._id === id)
   const updateAccountLocal = (id, name) => {
     dispatch(updateAccount(id, name))
   }

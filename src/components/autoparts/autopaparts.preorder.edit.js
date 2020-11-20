@@ -131,7 +131,7 @@ const AutopartUpdate = (props) => {
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
         <div className="-mx-3 md:flex mb-6 flex-wrap">
-          <div className="md:m-3 lg:flex rounded-lg px-6 py-2 w-auto shadow rounded-lg bg-gray-100 my-2">
+          <div className="md:m-3 lg:flex rounded-lg px-6 py-2 w-auto shadow bg-gray-100 my-2">
             <img
               className="h-32 w-32 m-5 rounded-full mx-auto md:mx-0"
               src={orderPlaceholder}
@@ -167,7 +167,7 @@ const AutopartUpdate = (props) => {
               </div>
             </div>
           </div>
-          <div className="md:m-3 lg:flex rounded-lg px-6 py-2 w-auto shadow rounded-lg bg-gray-100 my-2">
+          <div className="md:m-3 lg:flex rounded-lg px-6 py-2 w-auto shadow bg-gray-100 my-2">
             <img
               className="h-32 w-32 m-5 rounded-full mx-auto md:mx-0"
               src={malePlaceholder}
@@ -203,7 +203,7 @@ const AutopartUpdate = (props) => {
               </div>
             </div>
           </div>
-          <div className="md:m-3 lg:flex flex-col rounded-lg px-6 py-2 w-auto shadow rounded-lg bg-gray-100 my-2">
+          <div className="md:m-3 lg:flex flex-col rounded-lg px-6 py-2 w-auto shadow bg-gray-100 my-2">
             <div className="text-center md:text-left m-3">
               <div>
                 <ul>
@@ -320,7 +320,7 @@ const AutopartUpdate = (props) => {
               </div>
             ) : null}
           </div>
-          <div className="md:m-3 lg:flex rounded-lg px-6 py-2 w-auto shadow rounded-lg bg-gray-100 my-2">
+          <div className="md:m-3 lg:flex rounded-lg px-6 py-2 w-auto shadow bg-gray-100 my-2">
             <div className="text-center md:text-left m-3">
               <h2>История заказа</h2>
               <div>
@@ -358,7 +358,7 @@ const AutopartUpdate = (props) => {
             </div>
           </div>
 
-          <div className="md:m-3 lg:flex flex-col rounded-lg px-6 py-2 w-auto shadow rounded-lg bg-gray-100 my-2">
+          <div className="md:m-3 lg:flex flex-col rounded-lg px-6 py-2 w-auto shadow bg-gray-100 my-2">
             <div className="text-center md:text-left m-3">
               <b>Предварительный заказ</b>
               <div className="-mx-3 md:flex mb-2">
@@ -420,9 +420,9 @@ const AutopartUpdate = (props) => {
                   {inputFields.map((inputField, index) => (
                     <tr
                       key={index}
-                      className="bg-white lg:hover:bg-gray-100 flex table-row flex-row lg:flex-row flex-wrap flex-no-wrap mb-10 lg:mb-0"
+                      className="bg-white lg:hover:bg-gray-100 table-row flex-row lg:flex-row flex-wrap mb-10 lg:mb-0"
                     >
-                      <td className="lg:w-7/12 p-2 text-gray-800 text-center border border-b block table-cell relative static">
+                      <td className="lg:w-7/12 p-2 text-gray-800 text-center border border-b table-cell relative">
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
                           type="text"
@@ -438,9 +438,9 @@ const AutopartUpdate = (props) => {
                           onChange={(event) => handleChangeInput(index, event)}
                         />
                       </td>
-                      <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                      <td className="p-2 text-gray-800 text-center border border-b table-cell relative">
                         <input
-                          className="w-32 appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
+                          className="w-32 appearance-none block bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
                           name="quantity"
                           type="number"
                           value={inputField.quantity}
@@ -454,7 +454,7 @@ const AutopartUpdate = (props) => {
                           onChange={(event) => handleChangeInput(index, event)}
                         />
                       </td>
-                      <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                      <td className="p-2 text-gray-800 text-center border border-b table-cell relative">
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
                           name="price"
@@ -469,14 +469,14 @@ const AutopartUpdate = (props) => {
                           onChange={(event) => handleChangeInput(index, event)}
                         />
                       </td>
-                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block hidden md:table-cell relative static">
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b hidden md:table-cell relative">
                         <p>
                           {inputField.price && inputField.quantity
                             ? inputField.price * inputField.quantity
                             : null}
                         </p>
                       </td>
-                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b table-cell relative">
                         <select
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
                           name="stat"
@@ -503,7 +503,7 @@ const AutopartUpdate = (props) => {
                           ))}
                         </select>
                       </td>
-                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b table-cell relative">
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
                           type="text"
@@ -518,7 +518,7 @@ const AutopartUpdate = (props) => {
                           onChange={(event) => handleChangeInput(index, event)}
                         />
                       </td>
-                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b text-center table-cell">
+                      <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b table-cell">
                         <div className="flex flex-row">
                           <button
                             onClick={() => handleRemoveFields(index)}

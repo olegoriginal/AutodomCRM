@@ -18,6 +18,7 @@ import AutopartsList from "../scenes/Autoparts/Autoparts.list"
 import AutopartsNew from "../scenes/Autoparts/Autoparts.preorder.create"
 import AutopartEditSimple from "../scenes/Autoparts/Autopaparts.preorder.edit"
 import AutopartEditFull from "../scenes/Autoparts/Autoparts.edit"
+import AutopartView from "../scenes/Autoparts/Autoparts.preorder.view"
 import PlaceList from "../scenes/Places/Places.list"
 import PlaceNew from "../scenes/Places/Places.create"
 import PlaceEdit from "../scenes/Places/Places.edit"
@@ -29,7 +30,9 @@ import AccountNew from "../scenes/Accounts/Accounts.create"
 import AccountEdit from "../scenes/Accounts/Accounts.edit"
 import CustomerList from "../scenes/Customers/Customers.list"
 import CustomerNew from "../scenes/Customers/Customers.create"
+import CustomerEdit from "../scenes/Customers/Customers.edit"
 import Test from "../components/test-dynamic"
+import Dashboard from "../scenes/Dashboard"
 
 import Startup from "../Startup"
 
@@ -63,7 +66,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 const AdminRoute = ({ component: Component, ...rest }) => {
   const auth = useSelector((s) => s.auth)
   const func = (props) =>
-    !!auth.user && !!auth.token && auth.roles.includes("admin") ? (
+    !!auth.user && !!auth.token && !!auth.roles.includes("admin") ? (
       <Component {...props} />
     ) : (
       <Redirect
@@ -123,18 +126,10 @@ const RootComponent = (props) => {
               path="/login"
               component={() => <Home />}
             />
-            <Route exact path="/" component={() => <PlaceList />} />
-            {/* <Route exact path="/game" component={() => <Game />} />
-            <Route exact path="/beer" component={() => <Beer />} />
-
-            <PrivateRoute exact path="/chat" component={() => <Chat />} /> */}
+            {/* <PrivateRoute exact path="/" component={() => <PlaceList />} /> */}
+            <PrivateRoute exact path="/" component={() => <Dashboard />} />
             <Route exact path="/dashboard" component={() => <Home />} />
 
-            <AdminRoute
-              exact
-              path="/admin"
-              component={() => <PrivateComponent />}
-            />
             <PrivateRoute
               exact
               path="/place/list"
@@ -166,6 +161,11 @@ const RootComponent = (props) => {
               exact
               path="/autoparts/editfull/:id"
               component={AutopartEditFull}
+            />
+            <PrivateRoute
+              exact
+              path="/autoparts/view/:id"
+              component={AutopartView}
             />
             <PrivateRoute exact path="/details/:id" component={TaskDetails} />
             <PrivateRoute exact path="/place/list" component={PlaceList} />
@@ -202,6 +202,11 @@ const RootComponent = (props) => {
               exact
               path="/customer/create"
               component={CustomerNew}
+            />
+            <PrivateRoute
+              exact
+              path="/customer/edit/:id"
+              component={CustomerEdit}
             />
             <PrivateRoute exact path="/test" component={Test} />
           </Switch>

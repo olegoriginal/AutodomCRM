@@ -88,7 +88,11 @@ const AutopartsRow = (props) => {
       </td>
       <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static whitespace-no-wrap">
         <Link
-          to={`/autoparts/edit/${props.id_autoparts}`}
+          to={
+            props.role.includes("autopartfull")
+              ? `/autoparts/edit/${props.id_autoparts}`
+              : `/autoparts/view/${props.id_autoparts}`
+          }
           className="px-5 py-1 text-xs border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none"
         >
           Подробнее

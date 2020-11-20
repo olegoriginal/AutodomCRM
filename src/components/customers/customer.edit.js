@@ -2,16 +2,49 @@ import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { toast } from "react-toastify"
 import NumberFormat from "react-number-format"
+import Modal from "../Modal.delete"
 import "react-toastify/dist/ReactToastify.css"
 
-const CustomerCreate = (props) => {
+const CustomerUpdate = (props) => {
+  const [isOpen, SetIsOpen] = useState(false)
+  const removeCustomer = (e) => {
+    props.deleteCustomer(props.id, e.target.value)
+    history.push("/customer/list")
+    notify("Клиент удален")
+  }
+  const changeCustomer = () => {
+    if (!state.mod) notify("Заполните поле Объем двигателя")
+    if (!state.regnumber) notify("Заполните поле гос.номер")
+    if (!state.vinnumber) notify("Заполните поле VIN номер")
+    if (!state.mark) notify("Укажите марку авто")
+    if (!state.model) notify("Укажите модель авто")
+    if (!state.gen) notify("Укажите год авто")
+    if (!state.name) notify("Заполните поле Имя клиента")
+    if (!state.phone) notify("Заполните поле Телефон")
+    else if (
+      state.name &&
+      state.phone &&
+      state.mark &&
+      state.model &&
+      state.gen &&
+      state.mod &&
+      state.vinnumber &&
+      state.regnumber
+    ) {
+      props.updateCustomer(props.id, state)
+      history.push("/customer/list")
+      notify("Данные изменены")
+    }
+  }
   const [state, setState] = useState({
-    name: "",
-    phone: "",
-    mark: "",
-    model: "",
-    gen: "",
-    mod: "",
+    name: props.name,
+    phone: props.phone,
+    mark: props.mark,
+    model: props.model,
+    gen: props.gen,
+    mod: props.mod,
+    regnumber: props.regnumber,
+    vinnumber: props.vinnumber,
   })
 
   const [options, setOptions] = useState({
@@ -154,38 +187,13 @@ const CustomerCreate = (props) => {
       [name]: value.toUpperCase(),
     }))
   }
-
-  const sendData = () => {
-    if (!state.mod) notify("Заполните поле Объем двигателя")
-    if (!state.regnumber) notify("Заполните поле гос.номер")
-    if (!state.vinnumber) notify("Заполните поле VIN номер")
-    if (!state.mark) notify("Укажите марку авто")
-    if (!state.model) notify("Укажите модель авто")
-    if (!state.gen) notify("Укажите год авто")
-    if (!state.name) notify("Заполните поле Имя клиента")
-    if (!state.phone) notify("Заполните поле Телефон")
-    else if (
-      state.name &&
-      state.phone &&
-      state.mark &&
-      state.model &&
-      state.gen &&
-      state.mod &&
-      state.vinnumber &&
-      state.regnumber
-    ) {
-      props.create(state)
-      history.push("/customer/list")
-      notify("Авто клиента добавлено")
-    }
-  }
+  const history = useHistory()
 
   toast.configure()
   const notify = (arg) => {
     toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
   }
 
-  const history = useHistory()
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
@@ -413,21 +421,31 @@ const CustomerCreate = (props) => {
       <div className=" flex my-2">
         <Link
           to="/customer/list"
-          className="my-3 mr-2 py-2 md:w-1/3 px-3 bg-red-600 text-white text-center hover:bg-red-700 hover:text-white rounded-lg"
+          className="my-3 mr-2 py-2 md:w-1/3 px-3 bg-green-600 text-white text-center hover:bg-green-700 hover:text-white rounded-lg"
         >
           Отмена
         </Link>
-
+        <button
+          className="my-3 mr-2 py-2 w-1/3 px-3 bg-red-600 text-white text-center hover:bg-red-700 hover:text-white rounded-lg"
+          onClick={() => SetIsOpen(true)}
+        >
+          Удалить
+        </button>
         <button
           className="my-3 ml-2 py-2 md:w-2/3 px-3 bg-blue-600 text-white hover:bg-blue-700 hover:text-white rounded-lg"
-          onClick={sendData}
+          onClick={changeCustomer}
           type="submit"
         >
-          Создать
+          Сохранить
         </button>
       </div>
+      <Modal
+        open={isOpen}
+        onClose={() => SetIsOpen(false)}
+        onSubmit={removeCustomer}
+      />
     </div>
   )
 }
 
-export default CustomerCreate
+export default CustomerUpdate

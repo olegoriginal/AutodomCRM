@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const AccountRow = (props) => {
   const removeAccount = (e) => {
-    props.deleteAccount(props.id, e.target.value)
+    props.deleteAccount(props._id, e.target.value)
   }
 
   const newRoleArray = props.role.reduce(function (r, e) {
@@ -36,7 +36,7 @@ const AccountRow = (props) => {
       </td>
       <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static whitespace-no-wrap">
         <Link
-          to={`/account/edit/${props.id}`}
+          to={`/account/edit/${props._id}`}
           className="px-5 py-1 text-xs border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none"
         >
           Редактировать
