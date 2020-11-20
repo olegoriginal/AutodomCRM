@@ -1,13 +1,11 @@
 import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import Modal from "../Modal.delete"
 import "react-toastify/dist/ReactToastify.css"
 import roleList from "../../lists/account-role-list"
 
 const AccountUpdate = (props) => {
-  const list = useSelector((s) => s.places.list)
   const [isOpen, SetIsOpen] = useState(false)
   const removeAccount = (e) => {
     props.deleteAccount(props.id, e.target.value)
@@ -55,7 +53,6 @@ const AccountUpdate = (props) => {
   const notify = (arg) => {
     toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
   }
-  console.log(state)
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
@@ -103,7 +100,7 @@ const AccountUpdate = (props) => {
               Выберите место работы
             </label>
             {roleList.map((it, index) => (
-              <div key={it.id} className="mb-2">
+              <div key={index} className="mb-2">
                 <label>
                   <input
                     className="mr-2"

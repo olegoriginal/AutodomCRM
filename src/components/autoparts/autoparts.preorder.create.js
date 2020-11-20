@@ -122,7 +122,7 @@ const AutopartsCreate = (props) => {
     ) {
       setCustomerOptions([])
     }
-  }, [state.phone, state.regnumber, state.vinnumber])
+  }, [state.phone, state.regnumber, state.vinnumber, customerList])
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -397,20 +397,14 @@ const AutopartsCreate = (props) => {
                     id="employee"
                     onChange={onChange}
                   >
-                    <option
-                      value=""
-                      disabled
-                      selected
-                      hidden
-                      className="text-gray-800"
-                    >
+                    <option value="" disabled hidden className="text-gray-800">
                       Выберите сотрудника
                     </option>
                     {employeeList
                       .filter((it) => it.role.includes("запчасти"))
-                      .map((it) => {
+                      .map((it, index) => {
                         return (
-                          <option>
+                          <option key={index}>
                             {it.name} {it.surname}
                           </option>
                         )
@@ -442,17 +436,11 @@ const AutopartsCreate = (props) => {
                     id="place"
                     onChange={onChange}
                   >
-                    <option
-                      value=""
-                      disabled
-                      selected
-                      hidden
-                      className="text-gray-800"
-                    >
+                    <option value="" disabled hidden className="text-gray-800">
                       Выберете место
                     </option>
-                    {list.map((it) => {
-                      return <option>{it.name}</option>
+                    {list.map((it, index) => {
+                      return <option key={index}>{it.name}</option>
                     })}
                   </select>
                   <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
@@ -470,7 +458,7 @@ const AutopartsCreate = (props) => {
             <div className="mb-5">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-city"
+                htmlFor="grid-city"
               >
                 Гос. номер
               </label>
@@ -487,7 +475,7 @@ const AutopartsCreate = (props) => {
             <div className="md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-city"
+                htmlFor="grid-city"
               >
                 VIN номер
               </label>
@@ -506,7 +494,7 @@ const AutopartsCreate = (props) => {
             <div>
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-city"
+                htmlFor="grid-city"
               >
                 Авто в базе данных
               </label>
@@ -551,9 +539,9 @@ const AutopartsCreate = (props) => {
                             ? "Клиентов не найдено"
                             : "Выберите клиента"}
                         </option>
-                        {customerOptions.map((it) => {
+                        {customerOptions.map((it, index) => {
                           return (
-                            <option key={it.id} value={it.id}>
+                            <option key={index} value={it.id}>
                               {it.name}, {it.mark} {it.model} {it.regnumber},
                               {it.phone}
                             </option>
@@ -645,8 +633,8 @@ const AutopartsCreate = (props) => {
             />
             {stateId.mark ? (
               <datalist id="model_list">
-                {options.model.map((it) => (
-                  <option value={it.name} label={it.name_rus} />
+                {options.model.map((it, index) => (
+                  <option key={index} value={it.name} label={it.name_rus} />
                 ))}
               </datalist>
             ) : null}
@@ -676,8 +664,9 @@ const AutopartsCreate = (props) => {
               onChange={onChangeGen}
             />
             <datalist id="gen_list">
-              {options.gen.map((it) => (
+              {options.gen.map((it, index) => (
                 <option
+                  key={index}
                   value={
                     it.year_begin && it.year_end
                       ? `${it.name} (${it.year_begin}-${it.year_end})`
@@ -732,8 +721,8 @@ const AutopartsCreate = (props) => {
                     // a должно быть равным b
                     return 0
                   })
-                  .map((it) => (
-                    <option value={it.name} />
+                  .map((it, index) => (
+                    <option key={index} value={it.name} />
                   ))}
               </datalist>
             ) : null}
@@ -743,7 +732,7 @@ const AutopartsCreate = (props) => {
           <div className="md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-              for="grid-city"
+              htmlFor="grid-city"
             >
               Имя клиента
             </label>
@@ -760,7 +749,7 @@ const AutopartsCreate = (props) => {
           <div className="md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-              for="grid-city"
+              htmlFor="grid-city"
             >
               Номер телефона
             </label>
@@ -808,8 +797,8 @@ const AutopartsCreate = (props) => {
                         onChange={(event) => handleChangeInput(index, event)}
                       />
                       <datalist id="autoparts_list">
-                        {autopartsList.map((it) => (
-                          <option value={it} />
+                        {autopartsList.map((it, index) => (
+                          <option key={index} value={it} />
                         ))}
                       </datalist>
                     </td>
@@ -837,7 +826,7 @@ const AutopartsCreate = (props) => {
           <div className="md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-              for="grid-city"
+              htmlFor="grid-city"
             >
               Предоплата
             </label>
@@ -856,7 +845,7 @@ const AutopartsCreate = (props) => {
           <div className="md:w-2/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-              for="grid-city"
+              htmlFor="grid-city"
             >
               Комментарий
             </label>

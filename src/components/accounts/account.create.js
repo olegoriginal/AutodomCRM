@@ -1,12 +1,10 @@
 import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import roleList from "../../lists/account-role-list"
 
 const AccountCreate = (props) => {
-  const list = useSelector((s) => s.places.list)
 
   const [state, setState] = useState({
     email: "",
@@ -53,7 +51,7 @@ const AccountCreate = (props) => {
   }
 
   const history = useHistory()
-  console.log(state)
+
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
@@ -102,7 +100,7 @@ const AccountCreate = (props) => {
               Выберите должность
             </label>
             {roleList.map((it, index) => (
-              <div key={it.id} className="mb-2">
+              <div key={index} className="mb-2">
                 <label>
                   <input
                     className="mr-2"

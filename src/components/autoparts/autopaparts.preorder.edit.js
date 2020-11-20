@@ -3,9 +3,7 @@ import { Link, useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import cx from "classnames"
-import Modal from "../Modal.delete"
 import "react-toastify/dist/ReactToastify.css"
-import roleList from "../../lists/role-list"
 import malePlaceholder from "../../assets/profile_placeholder_male.webp"
 import orderPlaceholder from "../../assets/order_placeholder.webp"
 import taskStatuses from "../../task-statuses"
@@ -13,7 +11,6 @@ import cancelStatuses from "../../lists/cancel-statuses"
 import autopartStatuses from "../../lists/autoparts-statuses"
 
 const AutopartUpdate = (props) => {
-  const list = useSelector((s) => s.places.list)
   const employeeList = useSelector((s) => s.employees.list)
 
   const dateNow = new Date()
@@ -23,20 +20,6 @@ const AutopartUpdate = (props) => {
     .getMinutes()
     .toString()
     .replace(/^(\d)$/, "0$1")}`
-  const onStatusChange = (e) => {
-    const { name, value } = e.target
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
-  }
-
-  const [isOpen, SetIsOpen] = useState(false)
-  const removeAutopart = (e) => {
-    props.deleteAutopart(props.id, e.target.value)
-    history.push("/autoparts/order/list")
-    notify("Адрес удален")
-  }
 
   const [state, setState] = useState({
     status: props.status,
@@ -87,13 +70,7 @@ const AutopartUpdate = (props) => {
       [name]: value,
     }))
   }
-  // state.order.map((it) => ({autopartItem: it.autopartItem, quantity: it.quantity}))
-  const [inputOld, setInpuOld] = useState([
-    state.order.map((it) => ({
-      autopartItem: it.autopartItem,
-      quantity: it.quantity,
-    })),
-  ])
+
   const [inputFields, setInputFields] = useState(
     state.order.map((it) => ({
       autopartItem: it.autopartItem,
@@ -412,7 +389,7 @@ const AutopartUpdate = (props) => {
             >
               Заказ у поставщика
             </label>
-            <div class="overflow-x-auto md:w-full  mb-6 md:mb-0">
+            <div className="overflow-x-auto md:w-full  mb-6 md:mb-0">
               <table className="border-collapse w-full">
                 <thead>
                   <tr>
@@ -464,7 +441,6 @@ const AutopartUpdate = (props) => {
                       <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
                         <input
                           className="w-32 appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                          type="text"
                           name="quantity"
                           type="number"
                           value={inputField.quantity}
@@ -481,7 +457,6 @@ const AutopartUpdate = (props) => {
                       <td className="p-2 text-gray-800 text-center border border-b text-center block table-cell relative static">
                         <input
                           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-1 px-4"
-                          type="text"
                           name="price"
                           type="number"
                           value={inputField.price}

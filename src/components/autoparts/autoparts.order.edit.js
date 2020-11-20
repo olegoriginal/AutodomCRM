@@ -49,17 +49,6 @@ const AutopartsEdit = (props) => {
     }))
   )
 
-  const [customer, setCustomer] = useState({
-    regnumber: "",
-    vinnumber: "",
-    mark: "",
-    model: "",
-    gen: "",
-    mod: "",
-    name: "",
-    phone: "",
-  })
-
   useEffect(() => {
     fetch("/api/v1/carmark")
       .then((res) => res.json())
@@ -129,7 +118,7 @@ const AutopartsEdit = (props) => {
     ) {
       setCustomerOptions([])
     }
-  }, [state.phone, state.regnumber, state.vinnumber])
+  }, [state.phone, state.regnumber, state.vinnumber, customerList])
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -145,17 +134,6 @@ const AutopartsEdit = (props) => {
   const applyCustomer = (e) => {
     const newCustomer = customerList.find((it) => it.id === search)
     if (newCustomer) {
-      setCustomer((prevState) => ({
-        ...prevState,
-        regnumber: newCustomer.regnumber,
-        vinnumber: newCustomer.vinnumber,
-        mark: newCustomer.mark,
-        model: newCustomer.model,
-        gen: newCustomer.gen,
-        mod: newCustomer.mod,
-        name: newCustomer.name,
-        phone: newCustomer.phone,
-      }))
       setState((prevState) => ({
         ...prevState,
         regnumber: newCustomer.regnumber,
@@ -176,10 +154,6 @@ const AutopartsEdit = (props) => {
       ...prevState,
       [name]: value,
     }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
   }
 
   const onChangeCustomerUppercase = (e) => {
@@ -187,10 +161,6 @@ const AutopartsEdit = (props) => {
     setState((prevState) => ({
       ...prevState,
       [name]: value.toUpperCase().replace(/\s/g, ""),
-    }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      [name]: value.toUpperCase(),
     }))
   }
 
@@ -202,10 +172,6 @@ const AutopartsEdit = (props) => {
         .toUpperCase()
         .replace(/\s/g, "")
         .replace(/[^а-яё0-9]/i, ""),
-    }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      [name]: value.toUpperCase(),
     }))
   }
 
@@ -228,10 +194,6 @@ const AutopartsEdit = (props) => {
       gen: "",
       mod: "",
     }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      mark: value,
-    }))
   }
 
   const onChangeModel = (e) => {
@@ -248,10 +210,6 @@ const AutopartsEdit = (props) => {
       model: finModel ? finModel.id_car_model : "",
       gen: "",
       mod: "",
-    }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      model: value,
     }))
   }
 
@@ -272,10 +230,6 @@ const AutopartsEdit = (props) => {
       gen: findGen ? findGen.id_car_generation : "",
       mod: "",
     }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      gen: value,
-    }))
   }
 
   const onChangeMod = (e) => {
@@ -284,14 +238,8 @@ const AutopartsEdit = (props) => {
       ...prevState,
       mod: value,
     }))
-    setCustomer((prevState) => ({
-      ...prevState,
-      mod: value,
-    }))
   }
   const sendData = () => {
-    const checkCustomer =
-      customerList !== [] ? customerList.find((it) => it.id === search) : {}
     if (!state.employee) notify("Заполните поле Принял заказ")
     if (!state.place) notify("Заполните поле Заказ принят на точке")
     if (!state.regnumber) notify("Заполните поле гос.номер")

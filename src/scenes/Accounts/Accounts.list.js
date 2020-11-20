@@ -16,7 +16,6 @@ const AccountList = () => {
   }
   const dispatch = useDispatch()
   const list = useSelector((s) => s.accounts.list)
-  const place = useSelector((s) => s.places.list)
   const [isOpen, setIsOpen] = useState(false)
   const [itemId, setItemId] = useState("")
 

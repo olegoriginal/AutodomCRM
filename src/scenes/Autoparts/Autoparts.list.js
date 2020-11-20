@@ -6,10 +6,8 @@ import cx from "classnames"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import AutopartsRow from "../../components/autoparts/autoparts.row"
-import RowCreate from "../../components/tasks/row.create"
-import { createAutopart, updateStatus } from "../../redux/reducers/autoparts"
+import { updateStatus } from "../../redux/reducers/autoparts"
 import Navbar from "../../components/Navbar"
-import Modal from "../../components/Modal.delete"
 import Pagination from "./Pagination"
 import taskStatuses from "../../task-statuses"
 
@@ -18,16 +16,13 @@ const AutopartsList = () => {
   const list = useSelector((s) => s.autoparts.list)
   const revList = [].concat(list).reverse()
   const placesList = useSelector((s) => s.places.list)
-  const create = (name) => {
-    dispatch(createAutopart(name))
-  }
+
   const updateStatusLocal = (id, status) => {
     dispatch(updateStatus(id, status))
   }
-  const [options, setOptions] = useState([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(14)
+  const postsPerPage = 14
   const indexOfLastPost = currentPage * postsPerPage
   const indexOfFirstPost = indexOfLastPost - postsPerPage
 
@@ -105,7 +100,7 @@ const AutopartsList = () => {
       setLoading(true)
     }
     return () => {}
-  }, [])
+  }, [currentPosts.length, showSearch, loading])
   const currentPostsFiltered = revList
     .filter(
       (it) =>
@@ -150,7 +145,7 @@ const AutopartsList = () => {
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Поиск по номеру заказа
               </label>
@@ -190,7 +185,7 @@ const AutopartsList = () => {
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Поиск по номеру телефона
               </label>
@@ -232,7 +227,7 @@ const AutopartsList = () => {
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Поиск по VIN
               </label>
@@ -271,7 +266,7 @@ const AutopartsList = () => {
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Показать заказы
               </label>
@@ -288,11 +283,11 @@ const AutopartsList = () => {
                   name="status"
                   onChange={onChangeStatus}
                 >
-                  <option value="" disabled selected hidden>
+                  <option value="" disabled hidden>
                     Все
                   </option>
-                  {taskStatuses.map((it) => (
-                    <option>{it}</option>
+                  {taskStatuses.map((it, index) => (
+                    <option key={index}>{it}</option>
                   ))}
                 </select>
                 <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
@@ -309,7 +304,7 @@ const AutopartsList = () => {
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Сортировка по точке
               </label>
@@ -326,11 +321,11 @@ const AutopartsList = () => {
                   name="place"
                   onChange={onChangePlace}
                 >
-                  <option value="" disabled selected hidden>
+                  <option value="" disabled hidden>
                     Все
                   </option>
-                  {placesList.map((it) => {
-                    return <option>{it.name}</option>
+                  {placesList.map((it, index) => {
+                    return <option key={index}>{it.name}</option>
                   })}
                 </select>
                 <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
@@ -347,7 +342,7 @@ const AutopartsList = () => {
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                htmlFor="grid-first-name"
               >
                 Новых заказов
               </label>
@@ -423,16 +418,16 @@ const AutopartsList = () => {
             </thead>
             <tbody>
               {showSearch === false
-                ? currentPosts.map((it) => (
+                ? currentPosts.map((it, index) => (
                     <AutopartsRow
-                      key={it.id}
+                      key={index}
                       {...it}
                       updateStatus={updateStatusLocal}
                     />
                   ))
-                : currentPostsFiltered.map((it) => (
+                : currentPostsFiltered.map((it, index) => (
                     <AutopartsRow
-                      key={it.id}
+                      key={index}
                       {...it}
                       updateStatus={updateStatusLocal}
                     />
@@ -481,11 +476,7 @@ const AutopartsList = () => {
             />
           )}
         </div>
-        {/* <Link to="/autoparts/order/create">
-          <button className="py-2 w-full bg-blue-600 text-white hover:bg-blue-700 hover:text-white rounded-lg lg:my-3 my-0">
-            Добавить новый заказ
-          </button>
-        </Link> */}
+
         <Link to="/autoparts/order/create">
           <button className="fixed bottom-0 left-0 p-6 shadow bg-blue-600 text-white opacity-75 text-l hover:opacity-100 hover:bg-blue-700 hover:text-white rounded-full my-3 mx-3">
             Новый<br></br>заказ

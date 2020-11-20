@@ -40,12 +40,25 @@ userSchema.pre("save", async function (next) {
 
 userSchema.method({
   passwordMatches(password) {
-    console.log(bcrypt.hashSync(password), this.password)
     return bcrypt.compareSync(password, this.password)
   },
 })
 
 userSchema.statics = {
+  async toggleChannel({ email, channel }) {
+    const user = await this.findOne({ email }).exec()
+    if (!user) {
+      throw new Error("No User")
+    }
+    if (user.channels.indexOf(channel) >= 0) {
+      user.channels = user.channels.filter((ch) => ch !== channel)
+    } else {
+      user.channels = [...user.channels, channel]
+    }
+    await user.save()
+    return user
+  },
+
   async findAndValidateUser({ email, password }) {
     if (!email) {
       throw new Error("No Email")

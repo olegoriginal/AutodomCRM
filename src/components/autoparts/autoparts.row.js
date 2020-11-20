@@ -4,10 +4,6 @@ import { Link } from "react-router-dom"
 import taskStatuses from "../../task-statuses"
 
 const AutopartsRow = (props) => {
-  const changeStatus = (e) => {
-    props.updateStatus(props.id, e.target.value)
-  }
-
   return (
     <tr className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-5 lg:mb-0">
       <td className="w-full lg:w-auto p-2 text-gray-800 text-left text-sm lg:text-center border border-b block lg:table-cell relative lg:static">
@@ -27,10 +23,14 @@ const AutopartsRow = (props) => {
           Заказ:
         </span>
         {props.order.length !== 0 && props.order[0].autopartItem !== ""
-          ? props.order
+          ? props.order.slice(0, 2).map((it, index) => (
+              <p key={index} className="overflow-hidden">
+                {it.autopartItem}
+              </p>
+            ))
+          : props.preorder
               .slice(0, 2)
-              .map((it) => <p className="overflow-hidden">{it.autopartItem}</p>)
-          : props.preorder.slice(0, 2).map((it) => <p>{it.autopartItem}</p>)}
+              .map((it, index) => <p key={index}>{it.autopartItem}</p>)}
       </td>
 
       <td className="w-full lg:w-auto p-2 text-gray-800 text-left text-sm lg:text-center border border-b block lg:table-cell relative lg:static">

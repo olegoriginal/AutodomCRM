@@ -19,9 +19,6 @@ const CustomerList = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [itemId, setItemId] = useState("")
 
-  const auth = useSelector((s) => s.auth)
-  console.log(auth)
-
   const openAndDelete = (id) => {
     setIsOpen(true)
     setItemId(id)

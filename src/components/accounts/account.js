@@ -30,8 +30,8 @@ const AccountRow = (props) => {
         <span className="lg:hidden px-2 py-1 text-xs font-bold uppercase">
           Должность:
         </span>
-        {newRoleArray.map((it) => (
-          <p>{it}</p>
+        {newRoleArray.map((it, index) => (
+          <p key={index}>{it}</p>
         ))}
       </td>
       <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static whitespace-no-wrap">

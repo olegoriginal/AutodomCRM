@@ -15,6 +15,8 @@ const PlaceList = () => {
   }
   const dispatch = useDispatch()
   const list = useSelector((s) => s.places.list)
+  const auth = useSelector((s) => s.auth)
+  console.log(auth)
   const [isOpen, setIsOpen] = useState(false)
   const [itemId, setItemId] = useState("")
 

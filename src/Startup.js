@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getTasks } from "./redux/reducers/tasks"
-import { getOrders } from "./redux/reducers/orders"
 import { getAutoparts } from "./redux/reducers/autoparts"
 import { getPlaces } from "./redux/reducers/places"
 import { getEmployees } from "./redux/reducers/employees"
@@ -18,7 +17,7 @@ const Startup = (props) => {
       dispatch(trySignIn())
       dispatch(tryGetUserInfo())
     }
-  }, [])
+  }, [token, dispatch])
 
   useEffect(() => {
     dispatch(getAutoparts())

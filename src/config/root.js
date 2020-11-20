@@ -38,7 +38,7 @@ const OnlyAnonymousRoute = ({ component: Component, ...rest }) => {
 
   const func = (props) =>
     !!auth.user && !!auth.token ? (
-      <Redirect to={{ pathname: "/private" }} />
+      <Redirect to={{ pathname: "/login" }} />
     ) : (
       <Component {...props} />
     )

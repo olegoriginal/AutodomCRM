@@ -55,7 +55,7 @@ const EmployeeCreate = (props) => {
   }
 
   const history = useHistory()
-  console.log(state)
+
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
@@ -109,17 +109,11 @@ const EmployeeCreate = (props) => {
                 id="role"
                 onChange={onChange}
               >
-                <option
-                  value=""
-                  disabled
-                  selected
-                  hidden
-                  className="text-gray-800"
-                >
+                <option value="" disabled hidden className="text-gray-800">
                   Выберите должность
                 </option>
-                {roleList.map((it) => {
-                  return <option>{it}</option>
+                {roleList.map((it, id) => {
+                  return <option key={id}>{it}</option>
                 })}
               </select>
               <div className="pointer-events-none absolute top-0 mt-4  right-0 flex items-center px-2 text-gray-600">

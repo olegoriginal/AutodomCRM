@@ -15,6 +15,7 @@ const initialState = {
   token: cookies.get("token"),
   user: {},
   messages: [],
+  roles: [],
 }
 
 export default (state = initialState, action) => {
@@ -26,12 +27,14 @@ export default (state = initialState, action) => {
       return { ...state, email: action.email }
     }
 
-    case SHOW_MESSAGE: {
-      return { ...state, messages: [...state.messages, action.message] }
-    }
-
     case LOGIN: {
-      return { ...state, token: action.token, password: "", user: action.user }
+      return {
+        ...state,
+        token: action.token,
+        password: "",
+        user: action.user,
+        roles: action.user.role,
+      }
     }
 
     case UPDATE_PASSWORD: {
@@ -50,24 +53,27 @@ export function updatePasswordField(password) {
   return { type: UPDATE_PASSWORD, password }
 }
 
+export function trySignIn() {
+  return (dispatch) => {
+    try {
+      fetch("/api/v1/auth")
+        .then((r) => r.json())
+        .then((data) => {
+          dispatch({ type: LOGIN, token: data.token, user: data.user })
+          history.push("/chat")
+        })
+        .catch((err) => console.log(err))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 export function signOut() {
   return (dispatch) => {
     dispatch({ type: KICK_USER })
     history.push("/login")
   }
 }
-
-export function trySignIn() {
-  return (dispatch) => {
-    fetch("/api/v1/auth")
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({ type: LOGIN, token: data.token, user: data.user })
-        history.push("/place/list")
-      })
-  }
-}
-
 export function tryGetUserInfo() {
   return () => {
     try {
@@ -99,6 +105,7 @@ export function signIn() {
       .then((r) => r.json())
       .then((data) => {
         dispatch({ type: LOGIN, token: data.token, user: data.user })
+
         history.push("/place/list")
       })
   }

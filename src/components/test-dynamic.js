@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import AsyncSelect from "react-select"
-import { useSelector } from "react-redux"
 
 function Test() {
   const [search, setSearch] = useState()

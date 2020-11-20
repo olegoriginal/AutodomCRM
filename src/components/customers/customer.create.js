@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import roleList from "../../lists/role-list"
 import autopartsList from "../../lists/autoparts-list"
 
 const CustomerCreate = (props) => {
-  const list = useSelector((s) => s.places.list)
 
   const [inputFields, setInputFields] = useState([
     { addressItem: "", model: "" },

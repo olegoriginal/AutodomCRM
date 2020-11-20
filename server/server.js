@@ -54,9 +54,9 @@ app.use("/api/v1", autopartRoutes)
 app.use("/api/v1", customerRoutes)
 app.use("/api/v1", accountRoutes)
 
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build", "index.html"))
-})
+// app.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "../build", "index.html"))
+// })
 app.listen(process.env.PORT || 9000, () => {
   console.log("listening on", process.env.PORT || 9000)
 })
@@ -93,6 +93,6 @@ app.get("/api/v1/auth", async (req, res) => {
   }
 })
 
-app.get("/api/v1/user-info", auth([]), (req, res) => {
-  res.json({ status: "123" })
+app.get("/api/v1/user-info", auth("admin"), (req, res) => {
+  res.json({ status: 123 })
 })
