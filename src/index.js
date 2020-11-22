@@ -4,6 +4,8 @@ import { Provider } from "react-redux"
 import store, { history } from "./redux"
 import { ConnectedRouter } from "connected-react-router"
 import "./index.css"
+import "./styles/main.css"
+
 // import Routes from "./Routes"
 import RootComponent from "./config/root"
 import * as serviceWorker from "./serviceWorker"

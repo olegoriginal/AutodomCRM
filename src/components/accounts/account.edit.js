@@ -1,11 +1,15 @@
 import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
+import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import Modal from "../Modal.delete"
 import "react-toastify/dist/ReactToastify.css"
 import roleList from "../../lists/account-role-list"
 
 const AccountUpdate = (props) => {
+  const employeeList = useSelector((s) => s.employees.list)
+  const list = useSelector((s) => s.places.list)
+
   const [isOpen, SetIsOpen] = useState(false)
   const removeAccount = (e) => {
     props.deleteAccount(props._id, e.target.value)
@@ -23,6 +27,8 @@ const AccountUpdate = (props) => {
   const [state, setState] = useState({
     email: props.email,
     role: props.role,
+    name: props.name,
+    address: props.address,
   })
   const onChange = (e) => {
     const { name, value } = e.target
@@ -91,13 +97,85 @@ const AccountUpdate = (props) => {
             />
           </div>
         </div>
+        <div className="-mx-3 md:flex flex-wrap">
+          <div className="md:w-1/2 px-3 mb-6 md:mb-0 flex flex-col">
+            <label
+              className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              htmlFor="grid-first-name"
+            >
+              Выберите сотрудника
+            </label>
+            <div className="flex-shrink w-full inline-block relative mb-3">
+              <select
+                className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-3 px-4 mb-3"
+                value={state.name}
+                name="name"
+                id="name"
+                onChange={onChange}
+              >
+                <option value="" className="text-gray-800">
+                  Общий аккаунт
+                </option>
+                {employeeList.map((it, index) => {
+                  return (
+                    <option key={index}>
+                      {it.name} {it.surname}
+                    </option>
+                  )
+                })}
+              </select>
+              <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div className="md:w-1/2 px-3 mb-6 md:mb-0 flex flex-col">
+            <label
+              className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              htmlFor="grid-first-name"
+            >
+              Выберите место работы
+            </label>
+            <div className="flex-shrink w-full inline-block relative mb-3">
+              <select
+                className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-300 focus:border-gray-500 focus:outline-none rounded py-3 px-4 mb-3"
+                value={state.address}
+                name="address"
+                id="address"
+                onChange={onChange}
+              >
+                <option value="" className="text-gray-800">
+                  Общий аккаунт
+                </option>
+                {list.map((it, index) => {
+                  return <option key={index}>{it.name}</option>
+                })}
+              </select>
+              <div className="pointer-events-none absolute top-0 mt-2  right-0 flex items-center px-2 text-gray-600">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="-mx-3 md:flex flex-wrap mt-3">
           <div className="md:w-1/3 px-3 mb-6 md:mb-0 flex flex-col">
             <label
               className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               htmlFor="grid-first-name"
             >
-              Выберите место работы
+              Выберите должность
             </label>
             {roleList.map((it, index) => (
               <div key={index} className="mb-2">

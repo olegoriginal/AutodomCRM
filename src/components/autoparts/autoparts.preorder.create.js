@@ -11,6 +11,7 @@ const AutopartsCreate = (props) => {
   const list = useSelector((s) => s.places.list)
   const employeeList = useSelector((s) => s.employees.list)
   const customerList = useSelector((s) => s.customers.list)
+  const auth = useSelector((s) => s.auth)
 
   const [options, setOptions] = useState({
     mark: [],
@@ -27,7 +28,7 @@ const AutopartsCreate = (props) => {
   })
   const [inputFields, setInputFields] = useState([{ autopartItem: "" }])
   const [state, setState] = useState({
-    employee: "",
+    employee: auth.name,
     place: "",
     regnumber: "",
     vinnumber: "",
@@ -100,6 +101,24 @@ const AutopartsCreate = (props) => {
       })
     return () => {}
   }, [stateId.model])
+  useEffect(() => {
+    if (state.employee === "" && auth.name) {
+      setState((prevState) => ({
+        ...prevState,
+        employee: auth.name,
+      }))
+    }
+    return () => {}
+  }, [state.employee, auth.name])
+  useEffect(() => {
+    if (state.place === "" && auth.place) {
+      setState((prevState) => ({
+        ...prevState,
+        place: auth.place,
+      }))
+    }
+    return () => {}
+  }, [state.place, auth.place])
   const [customerOptions, setCustomerOptions] = useState([])
   useEffect(() => {
     if (

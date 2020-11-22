@@ -32,7 +32,9 @@ import CustomerList from "../scenes/Customers/Customers.list"
 import CustomerNew from "../scenes/Customers/Customers.create"
 import CustomerEdit from "../scenes/Customers/Customers.edit"
 import Test from "../components/test-dynamic"
+import Access from "../scenes/Access"
 import Dashboard from "../scenes/Dashboard"
+import Boss from "../scenes/Boss/Boss"
 
 import Startup from "../Startup"
 
@@ -71,7 +73,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
     ) : (
       <Redirect
         to={{
-          pathname: "/login",
+          pathname: "/access",
         }}
       />
     )
@@ -128,7 +130,9 @@ const RootComponent = (props) => {
             />
             {/* <PrivateRoute exact path="/" component={() => <PlaceList />} /> */}
             <PrivateRoute exact path="/" component={() => <Dashboard />} />
+            <Route exact path="/access" component={() => <Access />} />
             <Route exact path="/dashboard" component={() => <Home />} />
+            <AdminRoute exact path="/boss" component={() => <Boss />} />
 
             <PrivateRoute
               exact

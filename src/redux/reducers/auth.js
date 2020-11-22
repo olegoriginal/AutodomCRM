@@ -14,6 +14,8 @@ const initialState = {
   token: cookies.get("token"),
   user: {},
   roles: [],
+  place: "",
+  name: "",
 }
 
 export default (state = initialState, action) => {
@@ -34,6 +36,8 @@ export default (state = initialState, action) => {
         password: "",
         user: action.user,
         roles: action.user.role,
+        place: action.user.address,
+        name: action.user.name,
       }
     }
     default:
@@ -90,6 +94,8 @@ export function trySignIn() {
           token: data.token,
           user: data.user,
           roles: data.user.role,
+          place: data.user.address,
+          name: data.user.name,
         })
         // history.push("/account/list")
       })

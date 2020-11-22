@@ -38,7 +38,7 @@ const PlaceList = () => {
           <table className="border-collapse w-full">
             <thead>
               <tr>
-                <th className="p-3 w-full font-bold uppercase bg-gray-100 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                <th className="p-3 font-bold uppercase bg-gray-100 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Точка
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-100 text-gray-600 border border-gray-300 hidden lg:table-cell">

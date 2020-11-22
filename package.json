@@ -7,7 +7,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "autoprefixer": "^10.0.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "bcrypt-nodejs": "^0.0.3",
@@ -26,9 +25,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",
     "mongoose-sequence": "^5.3.0",
+    "onchange": "^7.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "postcss-cli": "^8.1.0",
+    "postcss": "^8.1.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-number-format": "^4.4.1",
@@ -43,7 +43,6 @@
     "redux-thunk": "^2.3.0",
     "socket.io": "^3.0.2",
     "sockjs-client": "^1.5.0",
-    "tailwindcss": "^1.9.2",
     "universal-cookie": "^4.0.4",
     "uuid": "^8.3.1"
   },
@@ -51,13 +50,15 @@
     "build:style": "tailwind build src/index.css -o src/styles/tailwind.css",
     "start": "nodemon server/server",
     "heroku:postbuild": "react-scripts build",
-    "start:dev": "npm run build:style && react-scripts start",
+    "start:dev": "yarn watch:css && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/*.js",
     "lint:fix": "eslint src/*.js --fix",
-    "prettier:fix": "prettier src/*.js --write"
+    "prettier:fix": "prettier src/*.js --write",
+    "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -75,10 +76,13 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.1",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "postcss-cli": "^7.1.1",
     "prettier": "^2.1.2",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "tailwindcss": "^1.4.6"
   }
 }

@@ -7,7 +7,7 @@ const AccountRow = (props) => {
   }
 
   const newRoleArray = props.role.reduce(function (r, e) {
-    var c = props.place.find((a) => e === a.value)
+    var c = props.roles.find((a) => e === a.value)
     if (c) r.push(c.name)
     return r
   }, [])
@@ -33,6 +33,12 @@ const AccountRow = (props) => {
         {newRoleArray.map((it, index) => (
           <p key={index}>{it}</p>
         ))}
+      </td>
+      <td className="w-full lg:w-auto p-2 text-gray-800 text-left lg:text-center border border-b block lg:table-cell relative lg:static">
+        <span className="lg:hidden px-2 py-1 text-xs font-bold uppercase">
+          Имя:
+        </span>
+        {props.name ? props.name : "Общий аккаунт"}
       </td>
       <td className="w-full lg:w-auto p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static whitespace-no-wrap">
         <Link

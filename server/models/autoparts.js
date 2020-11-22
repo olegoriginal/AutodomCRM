@@ -79,15 +79,19 @@ const Autopart = new mongoose.Schema({
     unique: true,
     default: () => uuid.v4(),
   },
+  // date: {
+  //   type: String,
+  //   default: () =>
+  //     `${dateNow.getDate()}.${
+  //       dateNow.getMonth() + 1
+  //     }.${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow
+  //       .getMinutes()
+  //       .toString()
+  //       .replace(/^(\d)$/, "0$1")}`,
+  // },
   date: {
-    type: String,
-    default: () =>
-      `${dateNow.getDate()}.${
-        dateNow.getMonth() + 1
-      }.${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow
-        .getMinutes()
-        .toString()
-        .replace(/^(\d)$/, "0$1")}`,
+    type: Date,
+    default: () => dateNow,
   },
   dateInWork: {
     type: String,

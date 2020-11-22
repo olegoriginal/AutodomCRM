@@ -47,6 +47,9 @@ const AccountList = () => {
                   Должность
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-100 text-gray-600 border border-gray-300 hidden lg:table-cell">
+                  Имя
+                </th>
+                <th className="p-3 font-bold uppercase bg-gray-100 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Действия
                 </th>
               </tr>
@@ -55,7 +58,7 @@ const AccountList = () => {
               {list.map((it, id) => (
                 <AccountRow
                   key={id}
-                  place={roleList}
+                  roles={roleList}
                   deleteAccount={openAndDelete}
                   {...it}
                 />

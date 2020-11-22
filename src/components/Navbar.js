@@ -100,6 +100,13 @@ const Navbar = () => {
           >
             Аккаунты
           </NavLink>
+          <NavLink
+            to="/boss"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
+            activeClassName="text-blue-600 underline font-semibold"
+          >
+            Босс
+          </NavLink>
         </div>
         <div className="relative inline-block text-left">
           <div>
