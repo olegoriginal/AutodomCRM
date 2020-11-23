@@ -35,9 +35,9 @@ export default (state = initialState, action) => {
         token: action.token,
         password: "",
         user: action.user,
-        roles: action.user.role,
-        place: action.user.address,
-        name: action.user.name,
+        roles: action.user ? action.user.role : [],
+        place: action.user ? action.user.address : "",
+        name: action.user ? action.user.name : "",
       }
     }
     default:
@@ -75,11 +75,7 @@ export function signIn() {
       .then((r) => r.json())
       .then((data) => {
         dispatch({ type: LOGIN, token: data.token, user: data.user })
-        history.push(
-          data.user.role.includes("autopart")
-            ? "/autoparts/order/list"
-            : "/admin"
-        )
+        history.push("/")
       })
   }
 }

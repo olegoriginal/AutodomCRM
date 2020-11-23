@@ -78,7 +78,7 @@ const Dashboard = () => {
                       клиентов, адресов и т.д.
                     </p>
                     {auth.roles.includes("admin") ? (
-                      <Link to="/admin">
+                      <Link to="/place/list">
                         <button className="bottom-0 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 hover:text-white rounded-lg lg:my-3 my-0">
                           Перейти
                         </button>

@@ -27,6 +27,7 @@ import EmployeeNew from "../scenes/Employees/Employees.create"
 import EmployeeEdit from "../scenes/Employees/Employees.edit"
 import AccountList from "../scenes/Accounts/Accounts.list"
 import AccountNew from "../scenes/Accounts/Accounts.create"
+import RegisterCommon from "../scenes/Accounts/Register.common"
 import AccountEdit from "../scenes/Accounts/Accounts.edit"
 import CustomerList from "../scenes/Customers/Customers.list"
 import CustomerNew from "../scenes/Customers/Customers.create"
@@ -123,11 +124,7 @@ const RootComponent = (props) => {
       >
         <Startup>
           <Switch>
-            <OnlyAnonymousRoute
-              exact
-              path="/login"
-              component={() => <Home />}
-            />
+            <Route exact path="/login" component={() => <Home />} />
             {/* <PrivateRoute exact path="/" component={() => <PlaceList />} /> */}
             <PrivateRoute exact path="/" component={() => <Dashboard />} />
             <Route exact path="/access" component={() => <Access />} />
@@ -172,14 +169,10 @@ const RootComponent = (props) => {
               component={AutopartView}
             />
             <PrivateRoute exact path="/details/:id" component={TaskDetails} />
-            <PrivateRoute exact path="/place/list" component={PlaceList} />
+            <AdminRoute exact path="/place/list" component={PlaceList} />
             <PrivateRoute exact path="/place/create" component={PlaceNew} />
             <PrivateRoute exact path="/place/edit/:id" component={PlaceEdit} />
-            <PrivateRoute
-              exact
-              path="/employee/list"
-              component={EmployeeList}
-            />
+            <AdminRoute exact path="/employee/list" component={EmployeeList} />
             <PrivateRoute
               exact
               path="/employee/create"
@@ -190,8 +183,9 @@ const RootComponent = (props) => {
               path="/employee/edit/:id"
               component={EmployeeEdit}
             />
-            <PrivateRoute exact path="/account/list" component={AccountList} />
+            <AdminRoute exact path="/account/list" component={AccountList} />
             <PrivateRoute exact path="/account/create" component={AccountNew} />
+            <Route exact path="/register" component={RegisterCommon} />
             <PrivateRoute
               exact
               path="/account/edit/:id"

@@ -1,5 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import {
   updateLoginField,
   updatePasswordField,
@@ -62,6 +63,11 @@ const LoginForm = () => {
             >
               Войти
             </button>
+            <Link to="/register">
+              <button className="text-blue-500 hover:text-blue-700">
+                Регистрация
+              </button>
+            </Link>
           </div>
         </form>
       </div>

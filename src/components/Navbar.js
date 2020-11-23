@@ -63,29 +63,15 @@ const Navbar = () => {
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
             activeClassName="text-blue-600 underline font-semibold"
           >
-            Заказы
+            Автозапчасти
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/place/list"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
             activeClassName="text-blue-600 underline font-semibold"
           >
             Адреса
-          </NavLink>
-          <NavLink
-            to="/admin"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
-            activeClassName="text-blue-600 underline font-semibold"
-          >
-            Администратор
-          </NavLink>
-          <NavLink
-            to="/employee/list"
-            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
-            activeClassName="text-blue-600 underline font-semibold"
-          >
-            Сотрудники
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/customer/list"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
@@ -94,12 +80,27 @@ const Navbar = () => {
             Клиенты
           </NavLink>
           <NavLink
+            to="/place/list"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
+            activeClassName="text-blue-600 underline font-semibold"
+          >
+            Администратор
+          </NavLink>
+          {/* <NavLink
+            to="/employee/list"
+            className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
+            activeClassName="text-blue-600 underline font-semibold"
+          >
+            Сотрудники
+          </NavLink> */}
+
+          {/* <NavLink
             to="/account/list"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
             activeClassName="text-blue-600 underline font-semibold"
           >
             Аккаунты
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/boss"
             className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-blue-700 mr-4"
@@ -117,7 +118,6 @@ const Navbar = () => {
               aria-haspopup="true"
               aria-expanded="true"
               onClick={DropdownOpen}
-              onBlur={() => setDropdown(false)}
             >
               <svg
                 version="1.1"
@@ -171,7 +171,6 @@ const Navbar = () => {
               aria-labelledby="options-menu"
             >
               <button
-                type="submit"
                 className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                 role="menuitem"
                 onClick={() => {

@@ -42,6 +42,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "socket.io": "^3.0.2",
+    "socket.io-client": "^3.0.3",
     "sockjs-client": "^1.5.0",
     "universal-cookie": "^4.0.4",
     "uuid": "^8.3.1"
