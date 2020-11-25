@@ -6,6 +6,12 @@ import "react-toastify/dist/ReactToastify.css"
 import roleList from "../../lists/account-role-list"
 
 const AccountCreate = (props) => {
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
+
+  const history = useHistory()
   const employeeList = useSelector((s) => s.employees.list)
   const list = useSelector((s) => s.places.list)
 
@@ -49,13 +55,6 @@ const AccountCreate = (props) => {
       notify("Аккаунт добавлен")
     }
   }
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
-  }
-
-  const history = useHistory()
 
   return (
     <div>

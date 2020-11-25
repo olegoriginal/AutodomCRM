@@ -7,10 +7,22 @@ import "react-toastify/dist/ReactToastify.css"
 import roleList from "../../lists/account-role-list"
 
 const AccountUpdate = (props) => {
+  const history = useHistory()
+
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
   const employeeList = useSelector((s) => s.employees.list)
   const list = useSelector((s) => s.places.list)
 
   const [isOpen, SetIsOpen] = useState(false)
+  const [state, setState] = useState({
+    email: props.email,
+    role: props.role,
+    name: props.name,
+    address: props.address,
+  })
   const removeAccount = (e) => {
     props.deleteAccount(props._id, e.target.value)
     history.push("/account/list")
@@ -24,12 +36,7 @@ const AccountUpdate = (props) => {
       notify("Данные изменены")
     }
   }
-  const [state, setState] = useState({
-    email: props.email,
-    role: props.role,
-    name: props.name,
-    address: props.address,
-  })
+
   const onChange = (e) => {
     const { name, value } = e.target
     setState((prevState) => ({
@@ -53,12 +60,6 @@ const AccountUpdate = (props) => {
     }
   }
 
-  const history = useHistory()
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
-  }
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">

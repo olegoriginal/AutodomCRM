@@ -6,6 +6,12 @@ import "react-toastify/dist/ReactToastify.css"
 
 const PlaceUpdate = (props) => {
   const [isOpen, SetIsOpen] = useState(false)
+  const [state, setState] = useState(props.name)
+  const history = useHistory()
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
   const removePlace = (e) => {
     props.deletePlace(props.id, e.target.value)
     history.push("/place/list")
@@ -19,16 +25,11 @@ const PlaceUpdate = (props) => {
       notify("Данные изменены")
     }
   }
-  const [state, setState] = useState(props.name)
+
   const onChange = ({ target: { value } }) => {
     setState(value)
   }
-  const history = useHistory()
 
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
-  }
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">

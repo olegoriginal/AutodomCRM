@@ -8,6 +8,12 @@ import orderPlaceholder from "../../assets/order_placeholder.webp"
 import taskStatuses from "../../task-statuses"
 
 const AutopartViewOrder = (props) => {
+  const history = useHistory()
+
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
   const [state, setState] = useState({
     comment: props.comment,
     prepay: props.prepay,
@@ -23,13 +29,6 @@ const AutopartViewOrder = (props) => {
       ...prevState,
       [name]: value,
     }))
-  }
-
-  const history = useHistory()
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
   }
 
   return (

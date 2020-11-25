@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Link, StaticRouter } from "react-router-dom"
 import cx from "classnames"
 import Navbar from "../../components/Navbar"
 import taskStatuses from "../../task-statuses"
@@ -33,10 +32,8 @@ const Boss = () => {
       )
     )
     return () => {}
-  }, [date.year, date.month])
-  console.log(
-    autopartsList.filter((item) => item.employee === "Евгений Павленко").length
-  )
+  }, [date.year, date.month, autopartsList])
+
   return (
     <div>
       <Navbar />

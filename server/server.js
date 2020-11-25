@@ -15,20 +15,17 @@ const customerRoutes = require("./routes/api/customer.routes")
 const accountRoutes = require("./routes/api/accounts.routes")
 const User = require("./models/User.model")
 const app = express()
+const sockjs = require("sockjs")
 const http = require("http").createServer(app)
 const io = require("socket.io")(http)
 const passport = require("passport")
 const config = require("./config")
 const auth = require("./middleware/auth")
+const { port } = require("./config")
 
 mongoose.connect()
 
-io.on("connection", (socket) => {
-  console.log("a user connected")
-  socket.on("disconnect", () => {
-    console.log("user disconnected")
-  })
-})
+let connections = []
 
 const middleware = [
   cors(),
@@ -104,4 +101,11 @@ app.get("/api/v1/auth", async (req, res) => {
 
 app.get("/api/v1/user-info", auth("admin"), (req, res) => {
   res.json({ status: 123 })
+})
+
+http.listen(process.env.PORT || 9020, () => {
+  console.log("socket on", process.env.PORT || 9020)
+})
+io.on("connection", function(socket){
+  console.log("User connected")
 })

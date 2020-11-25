@@ -1,7 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import Navbar from "../components/Navbar"
-import PlaceList from "../scenes/Places/Places.list"
 const Admin = () => {
   return (
     <div>

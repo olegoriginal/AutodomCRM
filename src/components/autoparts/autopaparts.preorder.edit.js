@@ -11,6 +11,12 @@ import cancelStatuses from "../../lists/cancel-statuses"
 import autopartStatuses from "../../lists/autoparts-statuses"
 
 const AutopartUpdate = (props) => {
+  const history = useHistory()
+
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
   const employeeList = useSelector((s) => s.employees.list)
 
   const dateNow = new Date()
@@ -118,13 +124,6 @@ const AutopartUpdate = (props) => {
         order: values,
       }))
     }
-  }
-
-  const history = useHistory()
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
   }
 
   return (

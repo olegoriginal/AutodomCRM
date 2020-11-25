@@ -9,6 +9,18 @@ import roleList from "../../lists/role-list"
 const EmployeeUpdate = (props) => {
   const list = useSelector((s) => s.places.list)
   const [isOpen, SetIsOpen] = useState(false)
+  const history = useHistory()
+
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
+  const [state, setState] = useState({
+    name: props.name,
+    surname: props.surname,
+    role: props.role,
+    address: props.address,
+  })
   const removeEmployee = (e) => {
     props.deleteEmployee(props.id, e.target.value)
     history.push("/employee/list")
@@ -22,12 +34,7 @@ const EmployeeUpdate = (props) => {
       notify("Данные изменены")
     }
   }
-  const [state, setState] = useState({
-    name: props.name,
-    surname: props.surname,
-    role: props.role,
-    address: props.address,
-  })
+
   const onChange = (e) => {
     const { name, value } = e.target
     setState((prevState) => ({
@@ -49,13 +56,6 @@ const EmployeeUpdate = (props) => {
         address: prevState.address.filter((it) => it !== name),
       }))
     }
-  }
-
-  const history = useHistory()
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
   }
 
   return (
@@ -111,12 +111,7 @@ const EmployeeUpdate = (props) => {
                 id="role"
                 onChange={onChange}
               >
-                <option
-                  value=""
-                  disabled
-                  hidden
-                  className="text-gray-800"
-                >
+                <option value="" disabled hidden className="text-gray-800">
                   Выберите должность
                 </option>
                 {roleList.map((it) => {

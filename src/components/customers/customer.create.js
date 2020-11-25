@@ -5,6 +5,12 @@ import NumberFormat from "react-number-format"
 import "react-toastify/dist/ReactToastify.css"
 
 const CustomerCreate = (props) => {
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
+
+  const history = useHistory()
   const [state, setState] = useState({
     name: "",
     phone: "",
@@ -180,12 +186,6 @@ const CustomerCreate = (props) => {
     }
   }
 
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
-  }
-
-  const history = useHistory()
   return (
     <div>
       <div className="bg-white shadow rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">

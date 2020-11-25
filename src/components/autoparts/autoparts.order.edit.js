@@ -8,6 +8,12 @@ import "react-toastify/dist/ReactToastify.css"
 import autopartsList from "../../lists/autoparts-list"
 
 const AutopartsEdit = (props) => {
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
+
+  const history = useHistory()
   const list = useSelector((s) => s.places.list)
   const employeeList = useSelector((s) => s.employees.list)
   const customerList = useSelector((s) => s.customers.list)
@@ -300,13 +306,6 @@ const AutopartsEdit = (props) => {
       }))
     }
   }
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
-  }
-
-  const history = useHistory()
 
   return (
     <div>

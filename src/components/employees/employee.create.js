@@ -7,7 +7,12 @@ import roleList from "../../lists/role-list"
 
 const EmployeeCreate = (props) => {
   const list = useSelector((s) => s.places.list)
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
 
+  const history = useHistory()
   const [state, setState] = useState({
     name: "",
     surname: "",
@@ -48,13 +53,6 @@ const EmployeeCreate = (props) => {
       notify("Запись добавлена")
     }
   }
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
-  }
-
-  const history = useHistory()
 
   return (
     <div>

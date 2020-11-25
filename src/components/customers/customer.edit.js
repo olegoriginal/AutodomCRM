@@ -6,7 +6,23 @@ import Modal from "../Modal.delete"
 import "react-toastify/dist/ReactToastify.css"
 
 const CustomerUpdate = (props) => {
+  const [state, setState] = useState({
+    name: props.name,
+    phone: props.phone,
+    mark: props.mark,
+    model: props.model,
+    gen: props.gen,
+    mod: props.mod,
+    regnumber: props.regnumber,
+    vinnumber: props.vinnumber,
+  })
   const [isOpen, SetIsOpen] = useState(false)
+  const history = useHistory()
+
+  toast.configure()
+  const notify = (arg) => {
+    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
+  }
   const removeCustomer = (e) => {
     props.deleteCustomer(props.id, e.target.value)
     history.push("/customer/list")
@@ -36,16 +52,6 @@ const CustomerUpdate = (props) => {
       notify("Данные изменены")
     }
   }
-  const [state, setState] = useState({
-    name: props.name,
-    phone: props.phone,
-    mark: props.mark,
-    model: props.model,
-    gen: props.gen,
-    mod: props.mod,
-    regnumber: props.regnumber,
-    vinnumber: props.vinnumber,
-  })
 
   const [options, setOptions] = useState({
     mark: [],
@@ -186,12 +192,6 @@ const CustomerUpdate = (props) => {
       ...prevState,
       [name]: value.toUpperCase(),
     }))
-  }
-  const history = useHistory()
-
-  toast.configure()
-  const notify = (arg) => {
-    toast.info(arg, { position: toast.POSITION.BOTTOM_RIGHT })
   }
 
   return (
